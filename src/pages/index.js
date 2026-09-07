@@ -5,15 +5,17 @@ import styles from './index.module.css';
 export default function Home() {
 	return (
 		<Layout
-			title="Under Construction"
-			description="Make Small Games is currently under construction."
+			title="Make Small Games"
+			description="Beginner-friendly game development workshops, lessons, and books."
 		>
-			<main className={styles.main}>
-				<img
-					src="/img/Under Construction Main Image.png"
-					alt="Make Small Games under construction"
-					className={styles.image}
-				/>
+			<main>
+				<section className={styles.hero}>
+					<img
+						src="/img/make-small-games-banner.png"
+						alt="Make Small Games"
+						className={styles.heroImage}
+					/>
+				</section>
 			</main>
 		</Layout>
 	);

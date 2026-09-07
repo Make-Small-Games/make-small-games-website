@@ -1,14 +1,10 @@
-.main {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: calc(100vh - 60px);
-	padding: 2rem;
+.hero {
+	width: 100%;
 	background: #111;
 }
 
-.image {
-	max-width: 100%;
+.heroImage {
+	display: block;
+	width: 100%;
 	height: auto;
-	border-radius: 12px;
 }

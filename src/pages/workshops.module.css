@@ -1,0 +1,85 @@
+.main {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 3rem 2rem;
+}
+.workshopCard {
+	margin-top: 3rem;
+	padding: 2rem;
+	border: 2px solid #9b6cff;
+	border-radius: 12px;
+	background: #222;
+	box-shadow: 0 0 18px rgba(143, 108, 255, 0.08);
+}
+
+.durationGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+	margin-top: 2rem;
+}
+
+.durationCard {
+	padding: 1.5rem;
+	border: 1px solid #555;
+	border-radius: 10px;
+	background: #1b1b1b;
+}
+
+.durationCard h3 {
+	margin-top: 0;
+}
+
+.durationCard ul {
+	padding-left: 1.2rem;
+}
+
+.oneHour {
+	border-top: 5px solid #ff5f6d;
+}
+
+.twoHour {
+	border-top: 5px solid #ffd166;
+}
+
+.threeHour {
+	border-top: 5px solid #6ee7a8;
+}
+
+.playButton {
+	display: block;
+	width: fit-content;
+	margin: 1.5rem auto 2rem;
+	padding: 0.7rem 1.4rem;
+	border-radius: 8px;
+    background: #35c9e8;
+    color: #111;
+	font-weight: 700;
+	text-decoration: none;
+	transition: transform 0.15s ease;
+}
+
+.playButton:hover {
+	color: #111;
+	text-decoration: none;
+	transform: translateY(-2px);
+}
+
+.requestButton {
+	display: block;
+	width: fit-content;
+	margin: 2rem auto 0;
+	padding: 0.8rem 1.5rem;
+	border-radius: 8px;
+	background: #9b6cff;
+	color: white;
+	font-weight: 700;
+	text-decoration: none;
+	transition: transform 0.15s ease;
+}
+
+.requestButton:hover {
+	color: white;
+	text-decoration: none;
+	transform: translateY(-2px);
+}
