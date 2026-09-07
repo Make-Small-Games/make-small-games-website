@@ -86,4 +86,4 @@ export default function Workshops() {
 			</main>
 		</Layout>
 	);
-}CSS
+}
