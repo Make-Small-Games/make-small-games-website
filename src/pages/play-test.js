@@ -4,9 +4,15 @@ export default function PlayTest() {
   return (
     <>
       <style>{`
-        body {
+        html,
+        body,
+        #__docusaurus {
           margin: 0;
+          width: 100%;
+          height: 100%;
           overflow: hidden;
+          overscroll-behavior: none;
+          touch-action: none;
         }
 
         .game-frame {
@@ -16,6 +22,9 @@ export default function PlayTest() {
           width: 100%;
           height: calc(100vh - 60px);
           border: 0;
+
+          touch-action: none;
+          overscroll-behavior: none;
         }
 
         .test-banner {
@@ -35,6 +44,9 @@ export default function PlayTest() {
           font-weight: bold;
 
           overflow: hidden;
+
+          touch-action: none;
+          overscroll-behavior: none;
         }
 
         .moving-thing {
