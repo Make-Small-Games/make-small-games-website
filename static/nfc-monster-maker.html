@@ -257,6 +257,65 @@
       color: var(--accent);
       font-size: 1.35rem;
     }
+    
+    .type-title {
+  margin: 18px 0 10px;
+  font-weight: 850;
+  font-size: 1rem;
+}
+
+.type-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.type-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+}
+
+.type-option.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.type-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  font-weight: 900;
+  border: 2px solid var(--border);
+}
+
+.type-icon.black-magic {
+  background: #16121f;
+  color: #d69cff;
+}
+
+.type-icon.white-magic {
+  background: #f5f1e9;
+  color: #332b46;
+}
+
+.type-icon.rainbow-magic {
+  background: linear-gradient(
+    135deg,
+    #ff93c4,
+    #fff609,
+    #78dc52,
+    #87f2ff,
+    #8e2ec4
+  );
+  color: #111;
+}
 
     .stat-list {
       display: grid;
@@ -426,14 +485,20 @@
         <p>Each pixel becomes one hexadecimal character from <strong>0-F</strong>. That gives the sprite exactly <strong>256 characters</strong>.</p>
         <div class="formula">
           NFC data:<br>
-          PIXELS|H=#|A=#|S=#
+          PIXELS|H=#|A=#|S=#|T=#<br><br>
+
+          T= Type<br><br>
+          B= Black Magic<br>
+          W= White Magic<br>
+          R= Rainbow Magic<br>
+
         </div>
 
         <p><strong>Every monster starts at:</strong><br>Health 1 · Attack 1 · Speed 1</p>
         <p>Then the player spends exactly <strong>10 additional points</strong>.</p>
 
         <div class="formula">
-          HP = 100 + ((Health - 1) × 5)<br>
+          HP = 120 + ((Health - 1) × 5)<br>
           Damage = 20 + (Attack - 1)<br>
           Dodge = 10 + ((Speed - 1) × 3%)<br>
           Max Dodge = 40%
@@ -455,7 +520,24 @@
       </div>
 
       <div class="points">Points Remaining: <strong id="pointsRemaining">10</strong></div>
+      <div class="type-title">Choose Magic Type</div>
 
+        <div class="type-picker">
+          <button type="button" class="type-option" data-type="B">
+            <span class="type-icon black-magic">B</span>
+            <span>Black Magic</span>
+          </button>
+
+          <button type="button" class="type-option" data-type="W">
+            <span class="type-icon white-magic">W</span>
+            <span>White Magic</span>
+          </button>
+
+          <button type="button" class="type-option" data-type="R">
+            <span class="type-icon rainbow-magic">R</span>
+            <span>Rainbow Magic</span>
+          </button>
+        </div>
       <div class="stat-list">
         <div class="stat-row">
           <div>
@@ -497,7 +579,7 @@
       <div class="combat-preview">
         <div class="combat-box">
           <div class="label">HP</div>
-          <div id="hpPreview" class="value">100</div>
+          <div id="hpPreview" class="value">120</div>
         </div>
         <div class="combat-box">
           <div class="label">Damage</div>
@@ -566,6 +648,8 @@
         attack: 1,
         speed: 1
       };
+
+      let selectedType = null;
 
       function saveUndoState() {
         undoStack.push([...pixels]);
@@ -712,7 +796,7 @@
       }
 
       function actualHP() {
-        return 100 + ((stats.health - 1) * 5);
+        return 120 + ((stats.health - 1) * 5);
       }
 
       function actualDamage() {
@@ -733,8 +817,9 @@
         document.getElementById("damagePreview").textContent = actualDamage();
         document.getElementById("dodgePreview").textContent = dodgePercent() + "%";
 
-        document.getElementById("generateBtn").disabled = pointsRemaining() !== 0;
 
+        document.getElementById("generateBtn").disabled =
+          pointsRemaining() !== 0 || selectedType === null;
         document.querySelectorAll("[data-stat][data-change]").forEach(button => {
           const stat = button.dataset.stat;
           const change = Number(button.dataset.change);
@@ -758,7 +843,19 @@
           updateStatsUI();
         });
       });
+      document.querySelectorAll(".type-option").forEach(button => {
+        button.addEventListener("click", () => {
+          selectedType = button.dataset.type;
 
+          document.querySelectorAll(".type-option").forEach(option => {
+            option.classList.remove("selected");
+          });
+
+          button.classList.add("selected");
+
+          updateStatsUI();
+        });
+      });
       function openModal() {
         copyStatus.textContent = "";
         modal.classList.add("show");
@@ -790,7 +887,7 @@
       }
 
       function makeNfcData() {
-        return `${spriteString()}|H=${stats.health}|A=${stats.attack}|S=${stats.speed}`;
+        return `${spriteString()}|H=${stats.health}|A=${stats.attack}|S=${stats.speed}|T=${selectedType}`;
       }
 
       document.getElementById("generateBtn").addEventListener("click", () => {
