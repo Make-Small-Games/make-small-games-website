@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Make Small Games - NFC Monster Creator</title>
+
   <style>
     :root {
       --bg: #100d1b;
@@ -18,7 +19,9 @@
       --border: #4a4169;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -31,7 +34,10 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    button, input { font: inherit; }
+    button,
+    input {
+      font: inherit;
+    }
 
     .app {
       width: min(1120px, calc(100% - 28px));
@@ -39,7 +45,9 @@
       padding: 28px 0 50px;
     }
 
-    header { margin-bottom: 22px; }
+    header {
+      margin-bottom: 22px;
+    }
 
     h1 {
       margin: 0;
@@ -66,7 +74,7 @@
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 20px;
-      box-shadow: 0 16px 50px rgba(0,0,0,.25);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, .25);
     }
 
     .canvas-wrap {
@@ -105,7 +113,10 @@
       color: var(--text);
       cursor: pointer;
       font-weight: 750;
-      transition: transform .08s ease, border-color .15s ease, opacity .15s ease;
+      transition:
+        transform .08s ease,
+        border-color .15s ease,
+        opacity .15s ease;
     }
 
     button:hover:not(:disabled) {
@@ -150,7 +161,9 @@
 
     .swatch.selected {
       border-color: var(--accent);
-      box-shadow: 0 0 0 2px #0b0912, 0 0 0 4px var(--accent);
+      box-shadow:
+        0 0 0 2px #0b0912,
+        0 0 0 4px var(--accent);
     }
 
     .swatch span {
@@ -159,7 +172,7 @@
       bottom: 2px;
       padding: 1px 4px;
       border-radius: 5px;
-      background: rgba(0,0,0,.68);
+      background: rgba(0, 0, 0, .68);
       color: white;
       font-size: .68rem;
       line-height: 1.25;
@@ -173,7 +186,11 @@
         linear-gradient(45deg, transparent 75%, #aaa 75%),
         linear-gradient(-45deg, transparent 75%, #aaa 75%);
       background-size: 12px 12px;
-      background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+      background-position:
+        0 0,
+        0 6px,
+        6px -6px,
+        -6px 0;
     }
 
     .instructions h2,
@@ -195,6 +212,7 @@
       line-height: 1.7;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: .9rem;
+      overflow-wrap: anywhere;
     }
 
     .small-note {
@@ -214,7 +232,9 @@
       backdrop-filter: blur(5px);
     }
 
-    .modal-backdrop.show { display: flex; }
+    .modal-backdrop.show {
+      display: flex;
+    }
 
     .modal {
       width: min(600px, 100%);
@@ -224,7 +244,7 @@
       border-radius: 18px;
       padding: 22px;
       background: var(--panel);
-      box-shadow: 0 24px 80px rgba(0,0,0,.55);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .55);
     }
 
     .modal-top {
@@ -234,7 +254,9 @@
       align-items: start;
     }
 
-    .modal h2 { margin: 0; }
+    .modal h2 {
+      margin: 0;
+    }
 
     .close {
       width: 40px;
@@ -257,65 +279,77 @@
       color: var(--accent);
       font-size: 1.35rem;
     }
-    
-    .type-title {
-  margin: 18px 0 10px;
-  font-weight: 850;
-  font-size: 1rem;
-}
 
-.type-picker {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 18px;
-}
+    .option-title {
+      margin: 18px 0 10px;
+      font-weight: 850;
+      font-size: 1rem;
+    }
 
-.type-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 8px;
-}
+    .type-picker {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
 
-.type-option.selected {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent);
-}
+    .type-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 8px;
+    }
 
-.type-icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 1.3rem;
-  font-weight: 900;
-  border: 2px solid var(--border);
-}
+    .type-option.selected,
+    .facing-option.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
 
-.type-icon.black-magic {
-  background: #16121f;
-  color: #d69cff;
-}
+    .type-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      border: 2px solid var(--border);
+    }
 
-.type-icon.white-magic {
-  background: #f5f1e9;
-  color: #332b46;
-}
+    .type-icon.water {
+      background: #163f72;
+      color: #87f2ff;
+    }
 
-.type-icon.rainbow-magic {
-  background: linear-gradient(
-    135deg,
-    #ff93c4,
-    #fff609,
-    #78dc52,
-    #87f2ff,
-    #8e2ec4
-  );
-  color: #111;
-}
+    .type-icon.fire {
+      background: #651f24;
+      color: #ff8135;
+    }
+
+    .type-icon.grass {
+      background: #193e2c;
+      color: #78dc52;
+    }
+
+    .facing-picker {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .facing-option {
+      min-height: 58px;
+      font-size: 1rem;
+      font-weight: 850;
+    }
+
+    .facing-arrow {
+      font-size: 1.5rem;
+      margin: 0 5px;
+    }
 
     .stat-list {
       display: grid;
@@ -404,7 +438,9 @@
       display: none;
     }
 
-    .output.show { display: block; }
+    .output.show {
+      display: block;
+    }
 
     textarea {
       display: block;
@@ -429,73 +465,175 @@
       font-size: .85rem;
     }
 
-    .success { color: var(--good); }
-    .error { color: var(--danger); }
+    .success {
+      color: var(--good);
+    }
+
+    .error {
+      color: var(--danger);
+    }
 
     @media (max-width: 850px) {
-      .layout { grid-template-columns: 1fr; }
-      .palette { grid-template-columns: repeat(8, 1fr); }
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .palette {
+        grid-template-columns: repeat(8, 1fr);
+      }
     }
 
     @media (max-width: 470px) {
-      .app { width: min(100% - 18px, 1120px); padding-top: 18px; }
-      .panel { padding: 13px; border-radius: 14px; }
-      .palette { grid-template-columns: repeat(4, 1fr); }
-      .combat-preview { grid-template-columns: 1fr; }
+      .app {
+        width: min(100% - 18px, 1120px);
+        padding-top: 18px;
+      }
+
+      .panel {
+        padding: 13px;
+        border-radius: 14px;
+      }
+
+      .palette {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .combat-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .type-picker {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
   <main class="app">
+
     <header>
       <h1>NFC Monster Creator</h1>
-      <p class="subtitle">Draw a 16×16 monster, spend 10 stat points, then generate the NFC data.</p>
+      <p class="subtitle">
+        Draw a 16×16 monster, choose its type and facing direction,
+        spend 10 stat points, then generate the NFC data.
+      </p>
     </header>
 
     <section class="layout">
+
       <div class="panel">
+
         <div class="canvas-wrap">
-          <canvas id="spriteCanvas" width="512" height="512" aria-label="16 by 16 sprite drawing grid"></canvas>
+          <canvas
+            id="spriteCanvas"
+            width="512"
+            height="512"
+            aria-label="16 by 16 sprite drawing grid">
+          </canvas>
         </div>
 
         <div class="palette-title">MakeCode Arcade Palette</div>
+
         <div id="palette" class="palette"></div>
 
         <div class="toolbar">
           <button id="undoBtn" type="button">Undo</button>
           <button id="clearBtn" type="button">Clear</button>
-          <button id="statsBtn" class="primary" type="button">Set Stats + Generate</button>
+          <button id="statsBtn" class="primary" type="button">
+            Set Monster + Generate
+          </button>
         </div>
 
         <section id="outputPanel" class="output">
+
           <h2>NFC Data</h2>
+
           <textarea id="outputCode" readonly></textarea>
-          <div class="toolbar" style="justify-content:flex-start">
-            <button id="copyBtn" class="primary" type="button">Copy NFC Data</button>
+
+          <div
+            class="toolbar"
+            style="justify-content:flex-start">
+
+            <button
+              id="copyBtn"
+              class="primary"
+              type="button">
+              Copy NFC Data
+            </button>
+
           </div>
+
           <div class="output-meta">
             <span id="byteCount"></span>
             <span id="copyStatus"></span>
           </div>
+
         </section>
+
       </div>
 
       <aside class="panel instructions">
+
         <h2>How it works</h2>
-        <p>Each pixel becomes one hexadecimal character from <strong>0-F</strong>. That gives the sprite exactly <strong>256 characters</strong>.</p>
+
+        <p>
+          Each pixel becomes one hexadecimal character from
+          <strong>0-F</strong>.
+          A 16×16 sprite therefore uses exactly
+          <strong>256 characters</strong>.
+        </p>
+
         <div class="formula">
-          NFC data:<br>
-          PIXELS|H=#|A=#|S=#|T=#<br><br>
+          NFC data:<br><br>
 
-          T= Type<br><br>
-          B= Black Magic<br>
-          W= White Magic<br>
-          R= Rainbow Magic<br>
+          256 sprite characters<br>
+          + 1 facing character<br>
+          + 1 type character<br>
+          + 1 Health character<br>
+          + 1 Attack character<br>
+          + 1 Speed character<br>
+          + 8 reserved characters<br><br>
 
+          Total = <strong>269 characters</strong>
         </div>
 
-        <p><strong>Every monster starts at:</strong><br>Health 1 · Attack 1 · Speed 1</p>
-        <p>Then the player spends exactly <strong>10 additional points</strong>.</p>
+        <p><strong>Facing:</strong></p>
+
+        <div class="formula">
+          L = Left<br>
+          F = Forward<br>
+          R = Right
+        </div>
+
+        <p><strong>Monster Type:</strong></p>
+
+        <div class="formula">
+          W = Water<br>
+          F = Fire<br>
+          G = Grass
+        </div>
+
+        <p><strong>Stats:</strong></p>
+
+        <div class="formula">
+          0-9 = values 0-9<br>
+          A = 10<br>
+          B = 11<br>
+          C = 12<br>
+          ...<br>
+          Z = 35
+        </div>
+
+        <p>
+          <strong>Every monster starts at:</strong><br>
+          Health 1 · Attack 1 · Speed 1
+        </p>
+
+        <p>
+          Then the player spends exactly
+          <strong>10 additional points</strong>.
+        </p>
 
         <div class="formula">
           HP = 120 + ((Health - 1) × 5)<br>
@@ -504,422 +642,1750 @@
           Max Dodge = 40%
         </div>
 
-        <p class="small-note">Speed also determines who attacks first. The NFC stores the three stat points, not the calculated combat values, so you can rebalance the game later without rewriting old cards.</p>
+        <p class="small-note">
+          Speed also determines who attacks first.
+          The NFC card stores the original stat values,
+          not calculated HP, damage, or dodge.
+          This means the battle formulas can be rebalanced later
+          without rewriting existing cards.
+        </p>
+
+        <p class="small-note">
+          The final 8 characters are currently reserved for future
+          monster data. For now they are all stored as 0.
+        </p>
+
       </aside>
+
     </section>
   </main>
 
-  <div id="statModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="statTitle">
+
+  <div
+    id="statModal"
+    class="modal-backdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="statTitle">
+
     <div class="modal">
+
       <div class="modal-top">
+
         <div>
-          <h2 id="statTitle">Distribute Stats</h2>
-          <div class="small-note">Each stat begins at 1. Spend all 10 bonus points.</div>
+          <h2 id="statTitle">Create Monster Data</h2>
+
+          <div class="small-note">
+            Choose the monster's type and facing direction,
+            then spend all 10 bonus stat points.
+          </div>
         </div>
-        <button id="closeModalBtn" class="close" type="button" aria-label="Close">×</button>
+
+        <button
+          id="closeModalBtn"
+          class="close"
+          type="button"
+          aria-label="Close">
+          ×
+        </button>
+
       </div>
 
-      <div class="points">Points Remaining: <strong id="pointsRemaining">10</strong></div>
-      <div class="type-title">Choose Magic Type</div>
 
-        <div class="type-picker">
-          <button type="button" class="type-option" data-type="B">
-            <span class="type-icon black-magic">B</span>
-            <span>Black Magic</span>
-          </button>
+      <div class="option-title">
+        Choose Monster Type
+      </div>
 
-          <button type="button" class="type-option" data-type="W">
-            <span class="type-icon white-magic">W</span>
-            <span>White Magic</span>
-          </button>
+      <div class="type-picker">
 
-          <button type="button" class="type-option" data-type="R">
-            <span class="type-icon rainbow-magic">R</span>
-            <span>Rainbow Magic</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          class="type-option"
+          data-type="W">
+
+          <span class="type-icon water">W</span>
+          <span>Water</span>
+
+        </button>
+
+
+        <button
+          type="button"
+          class="type-option"
+          data-type="F">
+
+          <span class="type-icon fire">F</span>
+          <span>Fire</span>
+
+        </button>
+
+
+        <button
+          type="button"
+          class="type-option"
+          data-type="G">
+
+          <span class="type-icon grass">G</span>
+          <span>Grass</span>
+
+        </button>
+
+      </div>
+
+
+      <div class="option-title">
+        Which way is your monster facing?
+      </div>
+
+      <div class="facing-picker">
+
+        <button
+          type="button"
+          class="facing-option"
+          data-facing="L">
+
+          <span class="facing-arrow">←</span>
+          Left
+
+        </button>
+
+        <button
+          type="button"
+          class="facing-option"
+          data-facing="F">
+
+
+          Forward
+
+        </button>
+
+        <button
+          type="button"
+          class="facing-option"
+          data-facing="R">
+
+          Right
+          <span class="facing-arrow">→</span>
+
+        </button>
+
+      </div>
+
+
+      <div class="points">
+        Points Remaining:
+        <strong id="pointsRemaining">10</strong>
+      </div>
+
+
       <div class="stat-list">
-        <div class="stat-row">
-          <div>
-            <div class="stat-name">Health</div>
-            <div class="stat-effect">+5 HP per bonus point</div>
-          </div>
-          <div class="stepper">
-            <button type="button" data-stat="health" data-change="-1">−</button>
-            <span id="healthValue" class="stat-value">1</span>
-            <button type="button" data-stat="health" data-change="1">+</button>
-          </div>
-        </div>
 
         <div class="stat-row">
+
           <div>
-            <div class="stat-name">Attack</div>
-            <div class="stat-effect">+1 damage per bonus point</div>
+            <div class="stat-name">
+              Health
+            </div>
+
+            <div class="stat-effect">
+              +5 HP per bonus point
+            </div>
           </div>
+
           <div class="stepper">
-            <button type="button" data-stat="attack" data-change="-1">−</button>
-            <span id="attackValue" class="stat-value">1</span>
-            <button type="button" data-stat="attack" data-change="1">+</button>
+
+            <button
+              type="button"
+              data-stat="health"
+              data-change="-1">
+              −
+            </button>
+
+            <span
+              id="healthValue"
+              class="stat-value">
+              1
+            </span>
+
+            <button
+              type="button"
+              data-stat="health"
+              data-change="1">
+              +
+            </button>
+
           </div>
+
         </div>
 
+
         <div class="stat-row">
+
           <div>
-            <div class="stat-name">Speed</div>
-            <div class="stat-effect">+3% dodge per bonus point; determines first turn</div>
+            <div class="stat-name">
+              Attack
+            </div>
+
+            <div class="stat-effect">
+              +1 damage per bonus point
+            </div>
           </div>
+
           <div class="stepper">
-            <button type="button" data-stat="speed" data-change="-1">−</button>
-            <span id="speedValue" class="stat-value">1</span>
-            <button type="button" data-stat="speed" data-change="1">+</button>
+
+            <button
+              type="button"
+              data-stat="attack"
+              data-change="-1">
+              −
+            </button>
+
+            <span
+              id="attackValue"
+              class="stat-value">
+              1
+            </span>
+
+            <button
+              type="button"
+              data-stat="attack"
+              data-change="1">
+              +
+            </button>
+
           </div>
+
         </div>
+
+
+        <div class="stat-row">
+
+          <div>
+            <div class="stat-name">
+              Speed
+            </div>
+
+            <div class="stat-effect">
+              +3% dodge per bonus point;
+              determines first turn
+            </div>
+          </div>
+
+          <div class="stepper">
+
+            <button
+              type="button"
+              data-stat="speed"
+              data-change="-1">
+              −
+            </button>
+
+            <span
+              id="speedValue"
+              class="stat-value">
+              1
+            </span>
+
+            <button
+              type="button"
+              data-stat="speed"
+              data-change="1">
+              +
+            </button>
+
+          </div>
+
+        </div>
+
       </div>
+
 
       <div class="combat-preview">
+
         <div class="combat-box">
           <div class="label">HP</div>
           <div id="hpPreview" class="value">120</div>
         </div>
+
         <div class="combat-box">
           <div class="label">Damage</div>
           <div id="damagePreview" class="value">20</div>
         </div>
+
         <div class="combat-box">
           <div class="label">Dodge</div>
           <div id="dodgePreview" class="value">10%</div>
         </div>
+
       </div>
 
+
       <div class="modal-actions">
-        <button id="resetStatsBtn" type="button">Reset Stats</button>
-        <button id="generateBtn" class="primary" type="button" disabled>Generate NFC Data</button>
+
+        <button
+          id="resetStatsBtn"
+          type="button">
+          Reset Stats
+        </button>
+
+        <button
+          id="generateBtn"
+          class="primary"
+          type="button"
+          disabled>
+          Generate NFC Data
+        </button>
+
       </div>
+
     </div>
   </div>
 
+
   <script>
     (() => {
+
+      // ============================================================
+      // SETTINGS
+      // ============================================================
+
       const GRID = 16;
+
       const CANVAS_SIZE = 512;
-      const CELL = CANVAS_SIZE / GRID;
+
+      const CELL =
+        CANVAS_SIZE / GRID;
+
       const BONUS_POINTS = 10;
 
-      // Official MakeCode Arcade default palette indices 0-15.
-      // Index 0 is transparent. Index 15 is black.
+
+      // ------------------------------------------------------------
+      // FINAL NFC FORMAT
+      //
+      // 0 - 255
+      // 256 sprite pixels
+      //
+      // 256
+      // facing:
+      // L or R
+      //
+      // 257
+      // type:
+      // W = Water
+      // F = Fire
+      // G = Grass
+      //
+      // 258
+      // Health
+      //
+      // 259
+      // Attack
+      //
+      // 260
+      // Speed
+      //
+      // 261 - 268
+      // 8 reserved characters
+      //
+      // TOTAL:
+      // 269 characters
+      // ------------------------------------------------------------
+
+      const RESERVED_DATA =
+        "00000000";
+
+
+      // Stats can use:
+      //
+      // 0-9 = 0-9
+      // A   = 10
+      // B   = 11
+      // ...
+      // Z   = 35
+
+      const VALUE_CHARACTERS =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
+      // ============================================================
+      // MAKECODE ARCADE COLORS
+      // ============================================================
+
       const COLORS = [
-        "#000000", // 0 transparent (drawn as checkerboard)
+
+        "#000000", // 0 transparent
+
         "#ffffff", // 1 white
+
         "#ff2121", // 2 red
+
         "#ff93c4", // 3 pink
+
         "#ff8135", // 4 orange
+
         "#fff609", // 5 yellow
+
         "#249ca3", // 6 teal
+
         "#78dc52", // 7 green
+
         "#003fad", // 8 blue
+
         "#87f2ff", // 9 light blue
+
         "#8e2ec4", // A purple
+
         "#a4839f", // B light purple
+
         "#5c406c", // C dark purple
+
         "#e5cdc4", // D tan
+
         "#91463d", // E brown
+
         "#000000"  // F black
+
       ];
 
-      const HEX = "0123456789ABCDEF";
 
-      const canvas = document.getElementById("spriteCanvas");
-      const ctx = canvas.getContext("2d");
-      const paletteEl = document.getElementById("palette");
-      const modal = document.getElementById("statModal");
-      const outputPanel = document.getElementById("outputPanel");
-      const outputCode = document.getElementById("outputCode");
-      const byteCount = document.getElementById("byteCount");
-      const copyStatus = document.getElementById("copyStatus");
+      const HEX =
+        "0123456789ABCDEF";
 
-      let pixels = new Array(GRID * GRID).fill(0);
-      let selectedColor = 15;
-      let drawing = false;
-      let lastPaintedIndex = -1;
-      let undoStack = [];
+
+      // ============================================================
+      // HTML ELEMENTS
+      // ============================================================
+
+      const canvas =
+        document.getElementById("spriteCanvas");
+
+      const ctx =
+        canvas.getContext("2d");
+
+      const paletteEl =
+        document.getElementById("palette");
+
+      const modal =
+        document.getElementById("statModal");
+
+      const outputPanel =
+        document.getElementById("outputPanel");
+
+      const outputCode =
+        document.getElementById("outputCode");
+
+      const byteCount =
+        document.getElementById("byteCount");
+
+      const copyStatus =
+        document.getElementById("copyStatus");
+
+
+      // ============================================================
+      // SPRITE DATA
+      // ============================================================
+
+      let pixels =
+        new Array(GRID * GRID).fill(0);
+
+      let selectedColor =
+        15;
+
+      let drawing =
+        false;
+
+      let lastPaintedIndex =
+        -1;
+
+      let undoStack =
+        [];
+
+
+      // ============================================================
+      // MONSTER DATA
+      // ============================================================
 
       let stats = {
+
         health: 1,
+
         attack: 1,
+
         speed: 1
+
       };
 
-      let selectedType = null;
+
+      let selectedType =
+        null;
+
+
+      let selectedFacing =
+        null;
+
+
+      // ============================================================
+      // UNDO
+      // ============================================================
 
       function saveUndoState() {
-        undoStack.push([...pixels]);
-        if (undoStack.length > 30) undoStack.shift();
+
+        undoStack.push(
+          [...pixels]
+        );
+
+        if (undoStack.length > 30) {
+
+          undoStack.shift();
+
+        }
+
       }
 
-      function checkerCell(x, y, size) {
-        const half = size / 2;
-        ctx.fillStyle = "#dadada";
-        ctx.fillRect(x, y, size, size);
-        ctx.fillStyle = "#a9a9a9";
-        ctx.fillRect(x, y, half, half);
-        ctx.fillRect(x + half, y + half, half, half);
+
+      // ============================================================
+      // DRAW TRANSPARENT CELL
+      // ============================================================
+
+      function checkerCell(
+        x,
+        y,
+        size
+      ) {
+
+        const half =
+          size / 2;
+
+        ctx.fillStyle =
+          "#dadada";
+
+        ctx.fillRect(
+          x,
+          y,
+          size,
+          size
+        );
+
+        ctx.fillStyle =
+          "#a9a9a9";
+
+        ctx.fillRect(
+          x,
+          y,
+          half,
+          half
+        );
+
+        ctx.fillRect(
+          x + half,
+          y + half,
+          half,
+          half
+        );
+
       }
+
+
+      // ============================================================
+      // DRAW SPRITE CANVAS
+      // ============================================================
 
       function drawCanvas() {
-        ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
-        for (let row = 0; row < GRID; row++) {
-          for (let col = 0; col < GRID; col++) {
-            const index = row * GRID + col;
-            const colorIndex = pixels[index];
-            const x = col * CELL;
-            const y = row * CELL;
+        ctx.clearRect(
+          0,
+          0,
+          CANVAS_SIZE,
+          CANVAS_SIZE
+        );
+
+
+        for (
+          let row = 0;
+          row < GRID;
+          row++
+        ) {
+
+          for (
+            let col = 0;
+            col < GRID;
+            col++
+          ) {
+
+            const index =
+              row * GRID + col;
+
+            const colorIndex =
+              pixels[index];
+
+            const x =
+              col * CELL;
+
+            const y =
+              row * CELL;
+
 
             if (colorIndex === 0) {
-              checkerCell(x, y, CELL);
+
+              checkerCell(
+                x,
+                y,
+                CELL
+              );
+
             } else {
-              ctx.fillStyle = COLORS[colorIndex];
-              ctx.fillRect(x, y, CELL, CELL);
+
+              ctx.fillStyle =
+                COLORS[colorIndex];
+
+              ctx.fillRect(
+                x,
+                y,
+                CELL,
+                CELL
+              );
+
             }
+
           }
+
         }
 
-        ctx.strokeStyle = "rgba(20, 15, 35, 0.55)";
-        ctx.lineWidth = 1;
-        for (let i = 0; i <= GRID; i++) {
-          const p = i * CELL + 0.5;
-          ctx.beginPath();
-          ctx.moveTo(p, 0);
-          ctx.lineTo(p, CANVAS_SIZE);
-          ctx.stroke();
+
+        // Draw grid
+
+        ctx.strokeStyle =
+          "rgba(20, 15, 35, 0.55)";
+
+        ctx.lineWidth =
+          1;
+
+
+        for (
+          let i = 0;
+          i <= GRID;
+          i++
+        ) {
+
+          const p =
+            i * CELL + 0.5;
+
 
           ctx.beginPath();
-          ctx.moveTo(0, p);
-          ctx.lineTo(CANVAS_SIZE, p);
+
+          ctx.moveTo(
+            p,
+            0
+          );
+
+          ctx.lineTo(
+            p,
+            CANVAS_SIZE
+          );
+
           ctx.stroke();
+
+
+          ctx.beginPath();
+
+          ctx.moveTo(
+            0,
+            p
+          );
+
+          ctx.lineTo(
+            CANVAS_SIZE,
+            p
+          );
+
+          ctx.stroke();
+
         }
+
       }
+
+
+      // ============================================================
+      // BUILD COLOR PALETTE
+      // ============================================================
 
       function buildPalette() {
-        COLORS.forEach((color, index) => {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "swatch" + (index === selectedColor ? " selected" : "");
-          button.title = index === 0 ? "0 - Transparent / Eraser" : `${HEX[index]} - Color ${index}`;
-          button.dataset.color = String(index);
 
-          if (index === 0) {
-            button.classList.add("transparent-swatch");
-          } else {
-            button.style.background = color;
+        COLORS.forEach(
+          (color, index) => {
+
+            const button =
+              document.createElement("button");
+
+
+            button.type =
+              "button";
+
+
+            button.className =
+              "swatch" +
+              (
+                index === selectedColor
+                  ? " selected"
+                  : ""
+              );
+
+
+            button.title =
+              index === 0
+                ? "0 - Transparent / Eraser"
+                : `${HEX[index]} - Color ${index}`;
+
+
+            button.dataset.color =
+              String(index);
+
+
+            if (index === 0) {
+
+              button.classList.add(
+                "transparent-swatch"
+              );
+
+            } else {
+
+              button.style.background =
+                color;
+
+            }
+
+
+            const label =
+              document.createElement("span");
+
+
+            label.textContent =
+              HEX[index];
+
+
+            button.appendChild(
+              label
+            );
+
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                selectedColor =
+                  index;
+
+
+                document
+                  .querySelectorAll(".swatch")
+                  .forEach(
+                    element => {
+
+                      element.classList.remove(
+                        "selected"
+                      );
+
+                    }
+                  );
+
+
+                button.classList.add(
+                  "selected"
+                );
+
+              }
+            );
+
+
+            paletteEl.appendChild(
+              button
+            );
+
+          }
+        );
+
+      }
+
+
+      // ============================================================
+      // FIND GRID CELL FROM MOUSE / TOUCH
+      // ============================================================
+
+      function getCellFromPointer(
+        event
+      ) {
+
+        const rect =
+          canvas.getBoundingClientRect();
+
+
+        const scaleX =
+          CANVAS_SIZE / rect.width;
+
+
+        const scaleY =
+          CANVAS_SIZE / rect.height;
+
+
+        const x =
+          (
+            event.clientX -
+            rect.left
+          ) * scaleX;
+
+
+        const y =
+          (
+            event.clientY -
+            rect.top
+          ) * scaleY;
+
+
+        const col =
+          Math.floor(
+            x / CELL
+          );
+
+
+        const row =
+          Math.floor(
+            y / CELL
+          );
+
+
+        if (
+          col < 0 ||
+          col >= GRID ||
+          row < 0 ||
+          row >= GRID
+        ) {
+
+          return null;
+
+        }
+
+
+        return {
+
+          row,
+
+          col,
+
+          index:
+            row * GRID + col
+
+        };
+
+      }
+
+
+      // ============================================================
+      // PAINT PIXEL
+      // ============================================================
+
+      function paint(
+        event
+      ) {
+
+        const cell =
+          getCellFromPointer(
+            event
+          );
+
+
+        if (
+          !cell ||
+          cell.index === lastPaintedIndex
+        ) {
+
+          return;
+
+        }
+
+
+        pixels[cell.index] =
+          selectedColor;
+
+
+        lastPaintedIndex =
+          cell.index;
+
+
+        drawCanvas();
+
+      }
+
+
+      // ============================================================
+      // DRAWING EVENTS
+      // ============================================================
+
+      canvas.addEventListener(
+        "pointerdown",
+        event => {
+
+          event.preventDefault();
+
+
+          saveUndoState();
+
+
+          drawing =
+            true;
+
+
+          lastPaintedIndex =
+            -1;
+
+
+          canvas.setPointerCapture(
+            event.pointerId
+          );
+
+
+          paint(
+            event
+          );
+
+        }
+      );
+
+
+      canvas.addEventListener(
+        "pointermove",
+        event => {
+
+          if (!drawing) {
+
+            return;
+
           }
 
-          const label = document.createElement("span");
-          label.textContent = HEX[index];
-          button.appendChild(label);
 
-          button.addEventListener("click", () => {
-            selectedColor = index;
-            document.querySelectorAll(".swatch").forEach(el => el.classList.remove("selected"));
-            button.classList.add("selected");
-          });
+          event.preventDefault();
 
-          paletteEl.appendChild(button);
-        });
-      }
 
-      function getCellFromPointer(event) {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = CANVAS_SIZE / rect.width;
-        const scaleY = CANVAS_SIZE / rect.height;
-        const x = (event.clientX - rect.left) * scaleX;
-        const y = (event.clientY - rect.top) * scaleY;
-        const col = Math.floor(x / CELL);
-        const row = Math.floor(y / CELL);
+          paint(
+            event
+          );
 
-        if (col < 0 || col >= GRID || row < 0 || row >= GRID) return null;
-        return { row, col, index: row * GRID + col };
-      }
-
-      function paint(event) {
-        const cell = getCellFromPointer(event);
-        if (!cell || cell.index === lastPaintedIndex) return;
-        pixels[cell.index] = selectedColor;
-        lastPaintedIndex = cell.index;
-        drawCanvas();
-      }
-
-      canvas.addEventListener("pointerdown", event => {
-        event.preventDefault();
-        saveUndoState();
-        drawing = true;
-        lastPaintedIndex = -1;
-        canvas.setPointerCapture(event.pointerId);
-        paint(event);
-      });
-
-      canvas.addEventListener("pointermove", event => {
-        if (!drawing) return;
-        event.preventDefault();
-        paint(event);
-      });
-
-      function stopDrawing(event) {
-        drawing = false;
-        lastPaintedIndex = -1;
-        if (event && canvas.hasPointerCapture(event.pointerId)) {
-          canvas.releasePointerCapture(event.pointerId);
         }
+      );
+
+
+      function stopDrawing(
+        event
+      ) {
+
+        drawing =
+          false;
+
+
+        lastPaintedIndex =
+          -1;
+
+
+        if (
+          event &&
+          canvas.hasPointerCapture(
+            event.pointerId
+          )
+        ) {
+
+          canvas.releasePointerCapture(
+            event.pointerId
+          );
+
+        }
+
       }
 
-      canvas.addEventListener("pointerup", stopDrawing);
-      canvas.addEventListener("pointercancel", stopDrawing);
 
-      document.getElementById("undoBtn").addEventListener("click", () => {
-        if (!undoStack.length) return;
-        pixels = undoStack.pop();
-        drawCanvas();
-      });
+      canvas.addEventListener(
+        "pointerup",
+        stopDrawing
+      );
 
-      document.getElementById("clearBtn").addEventListener("click", () => {
-        saveUndoState();
-        pixels.fill(0);
-        drawCanvas();
-      });
+
+      canvas.addEventListener(
+        "pointercancel",
+        stopDrawing
+      );
+
+
+      // ============================================================
+      // UNDO BUTTON
+      // ============================================================
+
+      document
+        .getElementById("undoBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            if (!undoStack.length) {
+
+              return;
+
+            }
+
+
+            pixels =
+              undoStack.pop();
+
+
+            drawCanvas();
+
+          }
+        );
+
+
+      // ============================================================
+      // CLEAR BUTTON
+      // ============================================================
+
+      document
+        .getElementById("clearBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            saveUndoState();
+
+
+            pixels.fill(0);
+
+
+            drawCanvas();
+
+          }
+        );
+
+
+      // ============================================================
+      // STAT POINTS
+      // ============================================================
 
       function pointsSpent() {
-        return (stats.health - 1) + (stats.attack - 1) + (stats.speed - 1);
+
+        return (
+
+          (stats.health - 1) +
+
+          (stats.attack - 1) +
+
+          (stats.speed - 1)
+
+        );
+
       }
+
 
       function pointsRemaining() {
-        return BONUS_POINTS - pointsSpent();
+
+        return (
+          BONUS_POINTS -
+          pointsSpent()
+        );
+
       }
+
+
+      // ============================================================
+      // COMBAT PREVIEW
+      // ============================================================
 
       function actualHP() {
-        return 120 + ((stats.health - 1) * 5);
+
+        return (
+          120 +
+          (
+            (stats.health - 1) *
+            5
+          )
+        );
+
       }
+
 
       function actualDamage() {
-        return 20 + (stats.attack - 1);
+
+        return (
+          20 +
+          (
+            stats.attack - 1
+          )
+        );
+
       }
+
 
       function dodgePercent() {
-        return Math.min(40, 10 + ((stats.speed - 1) * 3));
+
+        return Math.min(
+          40,
+          10 +
+          (
+            (stats.speed - 1) *
+            3
+          )
+        );
+
       }
+
+
+      // ============================================================
+      // UPDATE MONSTER OPTIONS UI
+      // ============================================================
 
       function updateStatsUI() {
-        document.getElementById("healthValue").textContent = stats.health;
-        document.getElementById("attackValue").textContent = stats.attack;
-        document.getElementById("speedValue").textContent = stats.speed;
-        document.getElementById("pointsRemaining").textContent = pointsRemaining();
 
-        document.getElementById("hpPreview").textContent = actualHP();
-        document.getElementById("damagePreview").textContent = actualDamage();
-        document.getElementById("dodgePreview").textContent = dodgePercent() + "%";
+        document
+          .getElementById("healthValue")
+          .textContent =
+          stats.health;
 
 
-        document.getElementById("generateBtn").disabled =
-          pointsRemaining() !== 0 || selectedType === null;
-        document.querySelectorAll("[data-stat][data-change]").forEach(button => {
-          const stat = button.dataset.stat;
-          const change = Number(button.dataset.change);
-          if (change < 0) {
-            button.disabled = stats[stat] <= 1;
-          } else {
-            button.disabled = pointsRemaining() <= 0;
+        document
+          .getElementById("attackValue")
+          .textContent =
+          stats.attack;
+
+
+        document
+          .getElementById("speedValue")
+          .textContent =
+          stats.speed;
+
+
+        document
+          .getElementById("pointsRemaining")
+          .textContent =
+          pointsRemaining();
+
+
+        document
+          .getElementById("hpPreview")
+          .textContent =
+          actualHP();
+
+
+        document
+          .getElementById("damagePreview")
+          .textContent =
+          actualDamage();
+
+
+        document
+          .getElementById("dodgePreview")
+          .textContent =
+          dodgePercent() + "%";
+
+
+        // Generate only if:
+        //
+        // all stat points are spent
+        // AND
+        // a type is selected
+        // AND
+        // facing is selected
+
+        document
+          .getElementById("generateBtn")
+          .disabled =
+
+          pointsRemaining() !== 0 ||
+
+          selectedType === null ||
+
+          selectedFacing === null;
+
+
+        document
+          .querySelectorAll(
+            "[data-stat][data-change]"
+          )
+          .forEach(
+            button => {
+
+              const stat =
+                button.dataset.stat;
+
+
+              const change =
+                Number(
+                  button.dataset.change
+                );
+
+
+              if (change < 0) {
+
+                button.disabled =
+                  stats[stat] <= 1;
+
+              } else {
+
+                button.disabled =
+                  pointsRemaining() <= 0;
+
+              }
+
+            }
+          );
+
+      }
+
+
+      // ============================================================
+      // STAT BUTTONS
+      // ============================================================
+
+      document
+        .querySelectorAll(
+          "[data-stat][data-change]"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                const stat =
+                  button.dataset.stat;
+
+
+                const change =
+                  Number(
+                    button.dataset.change
+                  );
+
+
+                if (
+                  change > 0 &&
+                  pointsRemaining() <= 0
+                ) {
+
+                  return;
+
+                }
+
+
+                if (
+                  change < 0 &&
+                  stats[stat] <= 1
+                ) {
+
+                  return;
+
+                }
+
+
+                stats[stat] +=
+                  change;
+
+
+                updateStatsUI();
+
+              }
+            );
+
           }
-        });
-      }
+        );
 
-      document.querySelectorAll("[data-stat][data-change]").forEach(button => {
-        button.addEventListener("click", () => {
-          const stat = button.dataset.stat;
-          const change = Number(button.dataset.change);
 
-          if (change > 0 && pointsRemaining() <= 0) return;
-          if (change < 0 && stats[stat] <= 1) return;
+      // ============================================================
+      // TYPE BUTTONS
+      // ============================================================
 
-          stats[stat] += change;
-          updateStatsUI();
-        });
-      });
-      document.querySelectorAll(".type-option").forEach(button => {
-        button.addEventListener("click", () => {
-          selectedType = button.dataset.type;
+      document
+        .querySelectorAll(
+          ".type-option"
+        )
+        .forEach(
+          button => {
 
-          document.querySelectorAll(".type-option").forEach(option => {
-            option.classList.remove("selected");
-          });
+            button.addEventListener(
+              "click",
+              () => {
 
-          button.classList.add("selected");
+                selectedType =
+                  button.dataset.type;
 
-          updateStatsUI();
-        });
-      });
+
+                document
+                  .querySelectorAll(
+                    ".type-option"
+                  )
+                  .forEach(
+                    option => {
+
+                      option
+                        .classList
+                        .remove(
+                          "selected"
+                        );
+
+                    }
+                  );
+
+
+                button
+                  .classList
+                  .add(
+                    "selected"
+                  );
+
+
+                updateStatsUI();
+
+              }
+            );
+
+          }
+        );
+
+
+      // ============================================================
+      // FACING BUTTONS
+      // ============================================================
+
+      document
+        .querySelectorAll(
+          ".facing-option"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                selectedFacing =
+                  button.dataset.facing;
+
+
+                document
+                  .querySelectorAll(
+                    ".facing-option"
+                  )
+                  .forEach(
+                    option => {
+
+                      option
+                        .classList
+                        .remove(
+                          "selected"
+                        );
+
+                    }
+                  );
+
+
+                button
+                  .classList
+                  .add(
+                    "selected"
+                  );
+
+
+                updateStatsUI();
+
+              }
+            );
+
+          }
+        );
+
+
+      // ============================================================
+      // OPEN / CLOSE MODAL
+      // ============================================================
+
       function openModal() {
-        copyStatus.textContent = "";
-        modal.classList.add("show");
+
+        copyStatus.textContent =
+          "";
+
+
+        modal
+          .classList
+          .add(
+            "show"
+          );
+
+
         updateStatsUI();
+
       }
+
 
       function closeModal() {
-        modal.classList.remove("show");
+
+        modal
+          .classList
+          .remove(
+            "show"
+          );
+
       }
 
-      document.getElementById("statsBtn").addEventListener("click", openModal);
-      document.getElementById("closeModalBtn").addEventListener("click", closeModal);
 
-      modal.addEventListener("click", event => {
-        if (event.target === modal) closeModal();
-      });
+      document
+        .getElementById("statsBtn")
+        .addEventListener(
+          "click",
+          openModal
+        );
 
-      document.addEventListener("keydown", event => {
-        if (event.key === "Escape" && modal.classList.contains("show")) closeModal();
-      });
 
-      document.getElementById("resetStatsBtn").addEventListener("click", () => {
-        stats = { health: 1, attack: 1, speed: 1 };
-        updateStatsUI();
-      });
+      document
+        .getElementById("closeModalBtn")
+        .addEventListener(
+          "click",
+          closeModal
+        );
+
+
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target === modal
+          ) {
+
+            closeModal();
+
+          }
+
+        }
+      );
+
+
+      document.addEventListener(
+        "keydown",
+        event => {
+
+          if (
+            event.key === "Escape" &&
+            modal
+              .classList
+              .contains(
+                "show"
+              )
+          ) {
+
+            closeModal();
+
+          }
+
+        }
+      );
+
+
+      // ============================================================
+      // RESET STATS
+      // ============================================================
+
+      document
+        .getElementById("resetStatsBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            stats = {
+
+              health: 1,
+
+              attack: 1,
+
+              speed: 1
+
+            };
+
+
+            updateStatsUI();
+
+          }
+        );
+
+
+      // ============================================================
+      // CONVERT SPRITE TO 256 CHARACTER STRING
+      // ============================================================
 
       function spriteString() {
-        return pixels.map(value => HEX[value]).join("");
+
+        return pixels
+          .map(
+            value =>
+              HEX[value]
+          )
+          .join("");
+
       }
+
+
+      // ============================================================
+      // CONVERT NUMBER TO ONE BASE-36 CHARACTER
+      //
+      // 0 = 0
+      // 1 = 1
+      // ...
+      // 9 = 9
+      // 10 = A
+      // 11 = B
+      // 12 = C
+      // ...
+      // 35 = Z
+      // ============================================================
+
+      function encodeStat(
+        value
+      ) {
+
+        if (
+          value < 0 ||
+          value > 35
+        ) {
+
+          throw new Error(
+            "Stat must be between 0 and 35."
+          );
+
+        }
+
+
+        return VALUE_CHARACTERS
+          .substr(
+            value,
+            1
+          );
+
+      }
+
+
+      // ============================================================
+      // CREATE FINAL NFC STRING
+      //
+      // 256 PIXELS
+      // +
+      // FACING
+      // +
+      // TYPE
+      // +
+      // HEALTH
+      // +
+      // ATTACK
+      // +
+      // SPEED
+      // +
+      // 8 RESERVED CHARACTERS
+      //
+      // TOTAL = 269 CHARACTERS
+      // ============================================================
 
       function makeNfcData() {
-        return `${spriteString()}|H=${stats.health}|A=${stats.attack}|S=${stats.speed}|T=${selectedType}`;
+
+        const healthCharacter =
+          encodeStat(
+            stats.health
+          );
+
+
+        const attackCharacter =
+          encodeStat(
+            stats.attack
+          );
+
+
+        const speedCharacter =
+          encodeStat(
+            stats.speed
+          );
+
+
+        return (
+
+          spriteString() +
+
+          selectedFacing +
+
+          selectedType +
+
+          healthCharacter +
+
+          attackCharacter +
+
+          speedCharacter +
+
+          RESERVED_DATA
+
+        );
+
       }
 
-      document.getElementById("generateBtn").addEventListener("click", () => {
-        if (pointsRemaining() !== 0) return;
 
-        const result = makeNfcData();
-        outputCode.value = result;
-        const bytes = new TextEncoder().encode(result).length;
-        byteCount.textContent = `${result.length} characters · ${bytes} bytes as UTF-8 text`;
-        outputPanel.classList.add("show");
-        closeModal();
-        outputPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      });
+      // ============================================================
+      // GENERATE NFC DATA
+      // ============================================================
 
-      document.getElementById("copyBtn").addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(outputCode.value);
-          copyStatus.textContent = "Copied!";
-          copyStatus.className = "success";
-        } catch (error) {
-          outputCode.focus();
-          outputCode.select();
-          document.execCommand("copy");
-          copyStatus.textContent = "Copied!";
-          copyStatus.className = "success";
-        }
-      });
+      document
+        .getElementById("generateBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            if (
+              pointsRemaining() !== 0
+            ) {
+
+              return;
+
+            }
+
+
+            if (
+              selectedType === null
+            ) {
+
+              return;
+
+            }
+
+
+            if (
+              selectedFacing === null
+            ) {
+
+              return;
+
+            }
+
+
+            const result =
+              makeNfcData();
+
+
+            outputCode.value =
+              result;
+
+
+            const bytes =
+              new TextEncoder()
+                .encode(
+                  result
+                )
+                .length;
+
+
+            byteCount.textContent =
+              `${result.length} characters · ${bytes} bytes as UTF-8 text`;
+
+
+            if (
+              result.length === 269 &&
+              bytes === 269
+            ) {
+
+              byteCount.className =
+                "success";
+
+            } else {
+
+              byteCount.className =
+                "error";
+
+            }
+
+
+            outputPanel
+              .classList
+              .add(
+                "show"
+              );
+
+
+            closeModal();
+
+
+            outputPanel
+              .scrollIntoView(
+                {
+                  behavior: "smooth",
+                  block: "nearest"
+                }
+              );
+
+          }
+        );
+
+
+      // ============================================================
+      // COPY NFC DATA
+      // ============================================================
+
+      document
+        .getElementById("copyBtn")
+        .addEventListener(
+          "click",
+          async () => {
+
+            try {
+
+              await navigator
+                .clipboard
+                .writeText(
+                  outputCode.value
+                );
+
+
+              copyStatus.textContent =
+                "Copied!";
+
+
+              copyStatus.className =
+                "success";
+
+            } catch (error) {
+
+              outputCode.focus();
+
+
+              outputCode.select();
+
+
+              document.execCommand(
+                "copy"
+              );
+
+
+              copyStatus.textContent =
+                "Copied!";
+
+
+              copyStatus.className =
+                "success";
+
+            }
+
+          }
+        );
+
+
+      // ============================================================
+      // START
+      // ============================================================
 
       buildPalette();
+
       drawCanvas();
+
       updateStatsUI();
+
     })();
   </script>
+
 </body>
 </html>
