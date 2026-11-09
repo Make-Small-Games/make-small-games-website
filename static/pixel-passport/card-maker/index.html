@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#130f22">
+  <title>Pixel Passport Card Maker | Make Small Games</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #100d1b;
+      --panel: #1b1630;
+      --panel-hi: #261f42;
+      --border: #50466f;
+      --text: #fbf8ff;
+      --muted: #c2b9d6;
+      --accent: #87f2ff;
+      --pink: #ff93c4;
+      --good: #a6f0b0;
+      --bad: #ffb6b3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(ellipse at 15% 0%, #2c224b 0, transparent 39rem),
+                  radial-gradient(ellipse at 92% 100%, #123948 0, transparent 37rem), var(--bg);
+      color: var(--text);
+    }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .site { max-width: 1240px; padding: 35px 22px 70px; margin: auto; }
+    .eyebrow { color: var(--accent); letter-spacing: .16em; font-size: .76rem; font-weight: 850; text-transform: uppercase; }
+    h1 { margin: 8px 0 8px; font-size: clamp(2rem, 4.5vw, 3.55rem); line-height: 1.06; letter-spacing: -.045em; }
+    .subtitle { color: var(--muted); line-height: 1.55; max-width: 810px; margin: 10px 0 27px; }
+    .layout { display: grid; grid-template-columns: minmax(325px, 440px) minmax(0, 1fr); gap: 20px; align-items: start; }
+    .panel { background: #1a162bea; border: 1px solid var(--border); box-shadow: 0 18px 55px #07050e55; border-radius: 18px; padding: 22px; }
+    .panel h2 { margin: 0 0 16px; font-size: 1.25rem; letter-spacing: -.02em; }
+    .field-label { display: block; font-size: .87rem; font-weight: 850; margin: 18px 0 8px; }
+    textarea, input[type="text"], select {
+      background: #0e0b19; color: var(--text); border: 1px solid #62577d;
+      border-radius: 10px; width: 100%; padding: 12px; outline: none;
+    }
+    textarea { resize: vertical; min-height: 136px; font: .86rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    textarea:focus, input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    input::placeholder, textarea::placeholder { color: #a49ab8; }
+    .field-hint { margin: 7px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.5; }
+    .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .space { justify-content: space-between; }
+    .secondary, .primary { padding: 12px 16px; border-radius: 10px; font-weight: 800; border: 1px solid var(--border); }
+    .secondary { background: var(--panel-hi); color: var(--text); }
+    .secondary:hover { border-color: var(--accent); }
+    .primary { background: var(--accent); color: #071a20; border-color: transparent; }
+    .primary:hover { background: #b2f7ff; }
+    button:disabled { cursor: not-allowed; opacity: .45; }
+    .small { padding: 8px 10px; font-size: .8rem; }
+    .full { width: 100%; }
+    .status { min-height: 44px; color: var(--muted); margin: 12px 0 2px; font-size: .84rem; line-height: 1.45; }
+    .status.good { color: var(--good); }
+    .status.bad { color: var(--bad); }
+    .section-break { height: 1px; background: var(--border); margin: 20px 0; }
+    .setting-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .radio-card { flex: 1 1 140px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; background: #120f22; padding: 13px; border: 1px solid #61577c; border-radius: 12px; line-height: 1.25; font-size: .87rem; font-weight: 750; }
+    .radio-card:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+    .radio-card span { color: var(--muted); font-size: .75rem; font-weight: 450; line-height: 1.4; margin-left: 23px; }
+    .radio-card input { accent-color: var(--accent); margin: 0 6px 0 0; }
+    .preview-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .type-pill { font-size: .75rem; font-weight: 850; border-radius: 50px; border: 1px solid #657286; color: var(--accent); padding: 6px 12px; }
+    .card-previews { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; margin: 8px auto 15px; }
+    .card-preview { min-width: 0; }
+    .card-preview h3 { color: var(--muted); font-size: .83rem; margin: 0 0 9px; font-weight: 800; }
+    .card-preview canvas { display: block; width: 100%; max-width: 298px; height: auto; aspect-ratio: 5 / 7; border-radius: 9px; box-shadow: 0 13px 30px #0008; }
+    .downloads { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .downloads button { min-width: 0; }
+    .print-tip { margin-top: 16px; border: 1px solid #4b526e; padding: 13px 15px; border-radius: 12px; background: #171c31; color: #d3daeb; font-size: .83rem; line-height: 1.6; }
+    .print-tip strong { color: white; }
+    footer { margin-top: 22px; text-align: center; color: var(--muted); font-size: .8rem; }
+    .print-root { display: none; }
+    @media (max-width: 820px) { .layout { grid-template-columns: 1fr; } .site { padding: 24px 14px 50px; } }
+    @media (max-width: 430px) { .panel { padding: 15px; } .card-previews { gap: 10px; } .downloads { grid-template-columns: 1fr; } }
+    @page { size: letter portrait; margin: 0; }
+    @media print {
+      :root { color-scheme: light; }
+      html, body { margin: 0 !important; padding: 0 !important; width: 8.5in; background: #fff !important; }
+      .site { display: none !important; }
+      .print-root { display: block !important; }
+      .print-page { position: relative; width: 8.5in; height: 11in; page-break-after: always; break-after: page; background: white; color: black; overflow: hidden; }
+      .print-page:last-child { page-break-after: auto; break-after: auto; }
+      .print-heading { position: absolute; left: .7in; top: .43in; font: 700 12pt Arial, sans-serif; }
+      .print-instructions { position: absolute; left: .7in; right: .7in; top: .73in; font: 9pt Arial, sans-serif; color: #333; }
+      .pair { position: absolute; left: 1.75in; width: 5in; height: 3.5in; display: flex; outline: .75pt dashed #666; }
+      .pair .printed-card { width: 2.5in; height: 3.5in; display: block; }
+      .pair .fold-line { position: absolute; z-index: 2; top: 0; bottom: 0; left: 2.5in; border-left: 1pt dashed #777; }
+      .single-card { position: absolute; left: 3in; width: 2.5in; height: 3.5in; outline: .75pt dashed #777; display: block; }
+      .guide-label { position: absolute; width: 5in; left: 1.75in; text-align: center; font: 8pt Arial, sans-serif; color: #555; }
+      .duplex-label { position: absolute; right: .7in; top: .45in; font: 700 11pt Arial, sans-serif; }
+    }
+    /* Print sheets are kept off-screen without deleting the source canvases. */
+  </style>
+</head>
+<body>
+  <main class="site">
+    <div class="eyebrow">Make Small Games · Pixel Passport</div>
+    <h1>Monster Card Maker</h1>
+    <p class="subtitle">Turn your Pixel Passport monster into a collectible card. Add its name, generate a Water, Fire, or Grass design, and print both sides at real trading-card size.</p>
+
+    <div class="layout">
+      <section class="panel" aria-label="Card settings">
+        <h2>1. Create your card</h2>
+        <label class="field-label" for="passport">Paste Pixel Passport NFC data</label>
+        <textarea id="passport" spellcheck="false" autocomplete="off" placeholder="Paste the 269-character code from NFC Monster Creator here..."></textarea>
+        <div class="row space" style="margin-top:7px">
+          <span class="field-hint" id="charCount" aria-live="polite">0 / 269 characters</span>
+          <button type="button" id="demoBtn" class="secondary small">Load example monster</button>
+        </div>
+        <p class="field-hint">Accepts the exact 269-character format from your editor: 256 pixels + facing + type + 3 stats + 8 reserved characters. Optional PPSTART/ZZSTART prefixes are also accepted.</p>
+
+        <label class="field-label" for="monsterName">Monster name</label>
+        <input id="monsterName" type="text" maxlength="26" placeholder="e.g. Bubblebyte" autocomplete="off">
+        <p class="field-hint">The name is printed on both the front and back.</p>
+        <button type="button" class="primary full" id="generateBtn" style="margin-top:20px">Generate Monster Card</button>
+        <p class="status" id="status" role="status" aria-live="polite">Paste a code or load the sample to begin.</p>
+
+        <div class="section-break"></div>
+        <h2>2. Print and cut</h2>
+        <div class="setting-group" role="group" aria-label="Print layout">
+          <label class="radio-card"><div><input type="radio" name="printMode" value="fold" checked> Fold-and-glue</div><span>Front and back on one side of the page. No duplex printer needed.</span></label>
+          <label class="radio-card"><div><input type="radio" name="printMode" value="duplex"> Double-sided</div><span>Front on page 1, back on page 2. Use a duplex printer.</span></label>
+        </div>
+        <label class="field-label" for="copyCount">Cards per print sheet</label>
+        <select id="copyCount"><option value="1">1 card</option><option value="2" selected>2 identical cards</option></select>
+        <button type="button" class="primary full" id="printBtn" disabled style="margin-top:15px">Print Card Sheet</button>
+        <p class="field-hint" style="margin-top:10px">Use US Letter paper, print at <strong>Actual size / 100%</strong>, and disable browser headers and footers. The card measures <strong>2.5 × 3.5 inches</strong>.</p>
+        <div class="print-tip" id="modeInstructions"><strong>Fold-and-glue:</strong> Cut around the 5 × 3.5 inch outline. Fold the right side behind the left with both printed designs facing outward, then glue or laminate. The dashed center line is your fold guide.</div>
+      </section>
+
+      <section class="panel" aria-label="Card previews">
+        <div class="preview-header">
+          <h2>Card preview</h2>
+          <span class="type-pill" id="typeLabel">Waiting for monster</span>
+        </div>
+        <div class="card-previews">
+          <div class="card-preview"><h3>FRONT · MONSTER & STATS</h3><canvas id="frontCanvas" width="750" height="1050" aria-label="Monster card front"></canvas></div>
+          <div class="card-preview"><h3>BACK · NFC STICKER AREA</h3><canvas id="backCanvas" width="750" height="1050" aria-label="Monster card back"></canvas></div>
+        </div>
+        <div class="downloads">
+          <button type="button" class="secondary" id="downloadFront" disabled>Download front PNG</button>
+          <button type="button" class="secondary" id="downloadBack" disabled>Download back PNG</button>
+        </div>
+        <div class="print-tip"><strong>Built for printing:</strong> Each PNG is 750 × 1050 pixels (300 DPI at 2.5 × 3.5 inches). The back contains a centered <strong>1.55-inch NFC sticker placement circle</strong>. The printable sheet adds cut guides outside the cards.</div>
+      </section>
+    </div>
+    <footer>Pixel Passport · Make Small Games · Your character, your adventure.</footer>
+  </main>
+  <div class="print-root" id="printRoot" aria-hidden="true"></div>
+
+<script>
+(() => {
+  "use strict";
+  // Matches the NFC Monster Creator's precise MakeCode Arcade palette.
+  // 0 is transparent; F is opaque black.
+  const COLORS = [
+    null, "#ffffff", "#ff2121", "#ff93c4",
+    "#ff8135", "#fff609", "#249ca3", "#78dc52",
+    "#003fad", "#87f2ff", "#8e2ec4", "#a4839f",
+    "#5c406c", "#e5cdc4", "#91463d", "#000000"
+  ];
+  const HEX = "0123456789ABCDEF";
+  const BASE36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const W = 750, H = 1050;
+  const THEMES = {
+    W: { type: "WATER", top: "#0b3356", bottom: "#08172d", mid: "#1e6689", light: "#8ff4ff", border: "#47cce7", panel: "#10405b", icon: "W" },
+    F: { type: "FIRE", top: "#572021", bottom: "#211020", mid: "#a34131", light: "#ffe0a2", border: "#ff8e50", panel: "#612626", icon: "F" },
+    G: { type: "GRASS", top: "#1e4c35", bottom: "#101e23", mid: "#367751", light: "#d3f99c", border: "#80d878", panel: "#24573a", icon: "G" }
+  };
+  const $ = id => document.getElementById(id);
+  const front = $("frontCanvas"), back = $("backCanvas");
+  const fctx = front.getContext("2d"), bctx = back.getContext("2d");
+  let current = null;
+  let currentName = "";
+
+  function roundedRect(ctx, x, y, w, h, r, fill, stroke, sw=1) {
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, r);
+    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = sw; ctx.stroke(); }
+  }
+  function text(ctx, str, x, y, size, color, weight=700, align="left", font="system-ui") {
+    ctx.font = `${weight} ${size}px ${font}`;
+    ctx.textAlign = align;
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = color;
+    ctx.fillText(str, x, y);
+  }
+  function fitted(ctx, str, x, y, maxSize, minSize, maxWidth, color, align="left", weight=900) {
+    let size = maxSize;
+    while (size > minSize) {
+      ctx.font = `${weight} ${size}px system-ui`;
+      if (ctx.measureText(str).width <= maxWidth) break;
+      size -= 2;
+    }
+    text(ctx, str, x, y, size, color, weight, align);
+  }
+  function strokeLine(ctx, x1, y1, x2, y2, color, width=1) {
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  }
+  function diamond(ctx, x, y, d, color) {
+    ctx.save(); ctx.translate(x,y); ctx.rotate(Math.PI/4); ctx.fillStyle = color; ctx.fillRect(-d/2,-d/2,d,d); ctx.restore();
+  }
+  function baseBackground(ctx, a, b) {
+    const grad = ctx.createLinearGradient(0,0,W,H);
+    grad.addColorStop(0,a); grad.addColorStop(1,b);
+    ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha = .1;
+    for (let y=0; y<H; y+=38) for (let x=0; x<W; x+=38) {
+      if (((x/38|0)+(y/38|0)) % 3 === 0) {
+        ctx.fillStyle = "#ffffff"; ctx.fillRect(x+7,y+7,3,3);
+      }
+    }
+    ctx.globalAlpha=1;
+  }
+  function frame(ctx, border) {
+    roundedRect(ctx,17,17,716,1016,32,null,"#070b17",16);
+    roundedRect(ctx,29,29,692,992,25,null,border,5);
+    roundedRect(ctx,42,42,666,966,18,null,"#ffffff44",2);
+    [[61,61],[689,61],[61,989],[689,989]].forEach(([x,y]) => diamond(ctx,x,y,12,border));
+  }
+  function emblem(ctx, type, cx, cy, scale, color) {
+    ctx.save(); ctx.translate(cx,cy); ctx.scale(scale,scale);
+    ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=4; ctx.lineJoin="round";
+    if (type === "W") {
+      ctx.beginPath(); ctx.moveTo(0,-24); ctx.bezierCurveTo(-14,-4,-22,5,-22,15); ctx.bezierCurveTo(-22,40,22,40,22,15); ctx.bezierCurveTo(22,5,14,-4,0,-24); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-11,14); ctx.quadraticCurveTo(-13,23,-2,26); ctx.strokeStyle="#ffffff99"; ctx.stroke();
+    } else if (type === "F") {
+      ctx.beginPath(); ctx.moveTo(-20,25); ctx.bezierCurveTo(-27,6,-10,-4,-8,-21); ctx.bezierCurveTo(4,-12,3,2,9,4); ctx.bezierCurveTo(14,-4,14,-15,15,-20); ctx.bezierCurveTo(36,6,27,29,9,32); ctx.bezierCurveTo(-7,38,-17,31,-20,25); ctx.fill();
+      ctx.fillStyle="#2c1824"; ctx.beginPath(); ctx.moveTo(1,0); ctx.quadraticCurveTo(-13,22,1,28); ctx.quadraticCurveTo(15,25,1,0); ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.moveTo(-24,24); ctx.bezierCurveTo(-33,-8,3,-29,27,-24); ctx.bezierCurveTo(26,-2,18,31,-10,31); ctx.bezierCurveTo(-15,31,-21,28,-24,24); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-19,26); ctx.lineTo(19,-14); ctx.strokeStyle="#11271d"; ctx.lineWidth=4; ctx.stroke();
+    }
+    ctx.restore();
+  }
+  function drawSprite(ctx, pixels, x, y, size) {
+    // Draw directly on the final canvas. Each 16×16 cell stays crisp.
+    const unit = size / 16;
+    for (let i=0; i<256; i++) {
+      const c=COLORS[pixels[i]];
+      if (!c) continue;
+      ctx.fillStyle=c;
+      ctx.fillRect(Math.round(x+(i%16)*unit),Math.round(y+Math.floor(i/16)*unit),Math.ceil(unit),Math.ceil(unit));
+    }
+  }
+  function drawFront(m, name) {
+    const c=fctx, t=THEMES[m.type];
+    c.clearRect(0,0,W,H);
+    baseBackground(c,t.top,t.bottom);
+    // Theme-dependent light rays behind the portrait.
+    c.save(); c.translate(375,500);
+    for(let i=0;i<16;i++) { c.rotate(Math.PI/8); c.fillStyle=t.border+"13"; c.beginPath(); c.moveTo(-22,-50); c.lineTo(22,-50); c.lineTo(145,-580); c.lineTo(-145,-580); c.closePath(); c.fill(); }
+    c.restore();
+    frame(c,t.border);
+    text(c,"PIXEL PASSPORT",74,98,27,"#ffffff",900);
+    text(c,"MAKE SMALL GAMES",676,97,16,t.light,800,"right");
+    strokeLine(c,74,116,677,116,t.border,2);
+    text(c,"MONSTER NAME",75,157,18,t.light,800);
+    fitted(c,name,73,226,64,26,595,"#ffffff");
+    roundedRect(c,74,247,603,65,15,"#071421c9",t.border,2.5);
+    roundedRect(c,90,259,188,41,20,t.mid,null);
+    emblem(c,m.type,112,279,.46,t.light);
+    text(c,t.type,152,286,23,"#ffffff",900);
+    text(c,"ORIGINAL CREATION",658,284,16,t.light,800,"right");
+    // Portrait frame, inset mat, and a transparent sprite.
+    roundedRect(c,74,332,603,429,25,"#051522b8",t.border,4);
+    roundedRect(c,90,348,571,397,17,t.panel+"bd","#ffffff28",2);
+    c.save(); c.globalAlpha=.2;
+    for(let y=370;y<740;y+=37) strokeLine(c,104,y,645,y,t.light,1);
+    for(let x=110;x<654;x+=37) strokeLine(c,x,362,x,732,t.light,1);
+    c.restore();
+    // Ground / mist gradient behind pixel art.
+    const glow=c.createRadialGradient(375,520,35,375,520,310);
+    glow.addColorStop(0,t.border+"55"); glow.addColorStop(1,t.border+"00");
+    c.fillStyle=glow; c.fillRect(102,358,546,377);
+    drawSprite(c,m.pixels,191,349,368);
+    text(c,"16 × 16 PIXEL CHARACTER",375,724,16,"#ffffffc9",800,"center");
+    const cards=[
+      { label:"HEALTH", val:String(m.hp), base:`H ${m.health}` },
+      { label:"ATTACK", val:String(m.damage), base:`A ${m.attack}` },
+      { label:"DODGE", val:`${m.dodge}%`, base:`S ${m.speed}` }
+    ];
+    cards.forEach((st,i) => {
+      const x=74+i*205;
+      roundedRect(c,x,783,193,161,17,"#091724df",t.border,2);
+      text(c,st.label,x+96,817,20,t.light,850,"center");
+      text(c,st.val,x+96,885,53,"#ffffff",950,"center");
+      text(c,st.base+"  •  BASE STAT",x+96,923,14,"#ffffffa8",700,"center");
+    });
+    text(c,`FACING: ${{L:"LEFT",F:"FORWARD",R:"RIGHT"}[m.facing]}`,74,982,16,t.light,800);
+    text(c,"YOUR MONSTER. YOUR ADVENTURE.",676,982,15,"#ffffffb8",800,"right");
+  }
+  function drawBack(m, name) {
+    const c=bctx;
+    c.clearRect(0,0,W,H);
+    baseBackground(c,"#30224c","#0f142b");
+    c.save(); c.translate(375,550);
+    for(let i=0;i<24;i++) {
+      c.rotate(Math.PI/12);
+      c.fillStyle=(i%2?"#77e6f6":"#f7d37f")+"12";
+      c.fillRect(-10,-485,20,150);
+    }
+    c.restore();
+    frame(c,"#efcb77");
+    text(c,"MAKE SMALL GAMES",375,110,20,"#8de9f7",900,"center");
+    strokeLine(c,155,135,595,135,"#d8c47b",2);
+    text(c,"PIXEL",375,206,64,"#ffffff",950,"center");
+    text(c,"PASSPORT",375,277,65,"#f3d68d",950,"center");
+    text(c,"MONSTER TRAVEL CARD",375,315,20,"#d8caed",800,"center");
+    // 465px is exactly 1.55 inches at 300 DPI.
+    const cx=375, cy=568, radius=232.5;
+    c.fillStyle="#1a1734"; c.beginPath(); c.arc(cx,cy,radius,0,Math.PI*2); c.fill();
+    c.strokeStyle="#f3d68d"; c.lineWidth=5; c.setLineDash([14,10]);
+    c.beginPath(); c.arc(cx,cy,radius-7,0,Math.PI*2); c.stroke(); c.setLineDash([]);
+    c.strokeStyle="#8be7f4aa"; c.lineWidth=2;
+    c.beginPath(); c.arc(cx,cy,radius-22,0,Math.PI*2); c.stroke();
+    c.beginPath(); c.arc(cx,cy,148,0,Math.PI*2); c.stroke();
+    // NFC wave icon.
+    for(let i=0;i<3;i++) {
+      c.strokeStyle="#8de9f7"; c.lineWidth=7; c.lineCap="round";
+      c.beginPath(); c.arc(cx-22,cy-38,24+i*22,-Math.PI/3,Math.PI/3); c.stroke();
+    }
+    c.fillStyle="#f3d68d"; c.beginPath(); c.arc(cx-16,cy-38,8,0,Math.PI*2); c.fill();
+    text(c,"PLACE NFC",375,cy+78,29,"#ffffff",900,"center");
+    text(c,"STICKER HERE",375,cy+111,25,"#f3d68d",850,"center");
+    text(c,"1.55 INCH DIAMETER",375,cy+143,16,"#c9bedb",700,"center");
+    text(c,"EVERY MONSTER HAS A STORY",375,865,20,"#f3d68d",800,"center");
+    const displayName=name.length>0?name:"UNNAMED MONSTER";
+    fitted(c,displayName,375,921,35,17,560,"#ffffff","center",850);
+    strokeLine(c,100,943,650,943,"#e7cc8766",2);
+    text(c,"WATER   ·   FIRE   ·   GRASS",375,978,18,"#d5cce9",750,"center");
+  }
+  function drawEmpty() {
+    [fctx,bctx].forEach((c,i)=>{
+      c.clearRect(0,0,W,H);
+      baseBackground(c,i?"#26203e":"#182a3b","#0d0e1e");
+      frame(c,"#5d5879");
+      text(c,i?"CARD BACK":"CARD FRONT",375,474,47,"#d0cbe2",900,"center");
+      text(c,"PASTE A PIXEL PASSPORT CODE",375,520,19,"#9a96b2",750,"center");
+      text(c,"TO CREATE YOUR CARD",375,552,19,"#9a96b2",750,"center");
+    });
+  }
+  function parsePassport(raw) {
+    let s=raw.toUpperCase().replace(/\s+/g,"");
+    if(s.startsWith("PPSTART") || s.startsWith("ZZSTART")) s=s.slice(7);
+    if(s.length!==269) throw new Error(`This code has ${s.length} characters, but your editor generates 269. Check that you copied the entire NFC Data field.`);
+    const pixelString=s.slice(0,256);
+    if(!/^[0-9A-F]{256}$/.test(pixelString)) throw new Error("The first 256 characters must be hexadecimal pixel colors (0–9, A–F).");
+    const facing=s[256], type=s[257];
+    if(!["L","F","R"].includes(facing)) throw new Error("Facing must be L, F, or R at position 257.");
+    if(!["W","F","G"].includes(type)) throw new Error("Monster type must be W, F, or G at position 258.");
+    const vals=[s[258],s[259],s[260]].map(c=>BASE36.indexOf(c));
+    if(vals.some(v=>v<1 || v>11)) throw new Error("Health, Attack, and Speed must each be between 1 and 11.");
+    if(vals.reduce((a,b)=>a+b,0)!==13) throw new Error("The three base stats must total 13 (1 point each, plus 10 bonus points).");
+    if(!/^[0-9A-Z]{8}$/.test(s.slice(261))) throw new Error("The final 8 reserved characters must be letters or digits.");
+    const [health,attack,speed]=vals;
+    return {
+      pixels:[...pixelString].map(ch=>HEX.indexOf(ch)),
+      facing,type,health,attack,speed,
+      hp:120+(health-1)*5,
+      damage:20+(attack-1),
+      dodge:Math.min(40,10+(speed-1)*3)
+    };
+  }
+  function setStatus(msg,kind="") {
+    $("status").textContent=msg; $("status").className="status "+kind;
+  }
+  function normalizedLength(raw) {
+    let s=raw.toUpperCase().replace(/\s+/g,"");
+    if(s.startsWith("PPSTART")||s.startsWith("ZZSTART"))s=s.slice(7);
+    return s.length;
+  }
+  function updateCounter() { $("charCount").textContent=`${normalizedLength($("passport").value)} / 269 characters`; }
+  function render() {
+    if(!current)return;
+    currentName=$("monsterName").value.trim()||"UNNAMED MONSTER";
+    drawFront(current,currentName);
+    drawBack(current,currentName);
+    $("typeLabel").textContent=`${THEMES[current.type].type} MONSTER`;
+    $("typeLabel").style.color=THEMES[current.type].light;
+    ["printBtn","downloadFront","downloadBack"].forEach(id=>$(id).disabled=false);
+  }
+  function generate() {
+    try {
+      const monster=parsePassport($("passport").value);
+      current=monster; render();
+      setStatus(`Card ready! ${THEMES[current.type].type.toLowerCase()} type detected. Health ${current.hp} · Damage ${current.damage} · Dodge ${current.dodge}%.`,"good");
+    } catch(err) { current=null; drawEmpty(); $("typeLabel").textContent="Waiting for monster"; ["printBtn","downloadFront","downloadBack"].forEach(id=>$(id).disabled=true); setStatus(err.message,"bad"); }
+  }
+  function demoData() {
+    const p=new Array(256).fill(0);
+    for(let y=2;y<=13;y++) for(let x=2;x<=13;x++) {
+      // Simple outlined water blob demo using the same palette indices.
+      const dx=(x-7.5)/5.9,dy=(y-8)/6.4;
+      const d=dx*dx+dy*dy;
+      if(d<1.0) p[y*16+x]=(d>.75?8:(x+y)%5===0?8:9);
+    }
+    for(let x=4;x<=11;x++)p[13*16+x]=8;
+    [[5,7],[10,7]].forEach(([x,y])=>{p[y*16+x]=15;p[(y+1)*16+x]=15;});
+    [[4,5],[5,4],[6,4]].forEach(([x,y])=>{p[y*16+x]=1;});
+    p[10*16+7]=8;p[10*16+8]=8;
+    return p.map(i=>HEX[i]).join("")+"FW35500000000";
+  }
+  function loadDemo() { $("passport").value=demoData(); $("monsterName").value="Bubblebyte"; updateCounter(); generate(); setStatus("Example monster loaded. Replace the code and name with your own creation.","good"); }
+  function download(canvas,label) {
+    if(!current)return;
+    const filename=($("monsterName").value.trim()||"monster").normalize("NFKD").replace(/[^a-z0-9_-]+/gi,"-").replace(/^-+|-+$/g,"").slice(0,60)||"monster";
+    const a=document.createElement("a"); a.download=`${filename}-pixel-passport-${label}.png`;
+    a.href=canvas.toDataURL("image/png"); document.body.appendChild(a);a.click();a.remove();
+  }
+  function makeImage(canvas,className) {
+    const img=document.createElement("img"); img.className=className;img.alt="";img.src=canvas.toDataURL("image/png");return img;
+  }
+  function addText(parent,cls,str) { const el=document.createElement("div");el.className=cls;el.textContent=str;parent.appendChild(el);return el; }
+  function makePage(heading,instructions) {
+    const page=document.createElement("div");page.className="print-page";
+    addText(page,"print-heading",heading);addText(page,"print-instructions",instructions);
+    $("printRoot").appendChild(page);return page;
+  }
+  function makePrint() {
+    if(!current)return;
+    const mode=document.querySelector('input[name="printMode"]:checked').value;
+    const count=Number($("copyCount").value);
+    $("printRoot").replaceChildren();
+    if(mode==="fold") {
+      const page=makePage("PIXEL PASSPORT · FOLD & CUT","Print at 100% / Actual Size • Cut the OUTSIDE outline • Fold the back behind the front along the center line • Glue or laminate");
+      const ys=count===2?[1.45,6.12]:[3.45];
+      ys.forEach(y=>{
+        const pair=document.createElement("div");pair.className="pair";pair.style.top=y+"in";
+        pair.appendChild(makeImage(front,"printed-card"));
+        pair.appendChild(makeImage(back,"printed-card"));
+        const fold=document.createElement("div");fold.className="fold-line";pair.appendChild(fold);page.appendChild(pair);
+      });
+    } else {
+      const ys=count===2?[1.45,6.12]:[3.45];
+      ["FRONT","BACK"].forEach((side,i)=>{
+        const page=makePage(`PIXEL PASSPORT · DOUBLE-SIDED ${side}`,"Print at 100% / Actual Size • Duplex: flip on LONG edge • Disable headers/footers • Cut the dotted outline after printing");
+        addText(page,"duplex-label",`PAGE ${i+1} OF 2`);
+        ys.forEach(y=>{const card=makeImage(i?back:front,"single-card");card.style.top=y+"in";page.appendChild(card);});
+      });
+    }
+    // Wait until the data-URI images have loaded before opening print dialog.
+    const imgs=[...$("printRoot").querySelectorAll("img")];
+    Promise.all(imgs.map(img=>img.decode?.().catch(()=>{})??Promise.resolve()))
+      .then(()=>window.print())
+      .catch(()=>window.print());
+  }
+  function updateModeInfo() {
+    const mode=document.querySelector('input[name="printMode"]:checked').value;
+    $("modeInstructions").innerHTML=mode==="fold"
+      ?"<strong>Fold-and-glue:</strong> Cut around the 5 × 3.5 inch outline. Fold the right side behind the left with both printed designs facing outward, then glue or laminate. The dashed center line is your fold guide."
+      :"<strong>Double-sided:</strong> Print both pages with <strong>flip on long edge</strong>. Cut around each 2.5 × 3.5 inch card outline. Print one test sheet first because duplex registration varies by printer.";
+  }
+  $("generateBtn").addEventListener("click",generate);
+  $("demoBtn").addEventListener("click",loadDemo);
+  $("passport").addEventListener("input",()=>{updateCounter();setStatus("Code changed. Select Generate Monster Card to update the preview.");});
+  $("monsterName").addEventListener("input",()=>{if(current)render();});
+  $("downloadFront").addEventListener("click",()=>download(front,"front"));
+  $("downloadBack").addEventListener("click",()=>download(back,"back"));
+  $("printBtn").addEventListener("click",makePrint);
+  document.querySelectorAll('input[name="printMode"]').forEach(el=>el.addEventListener("change",updateModeInfo));
+  drawEmpty();updateCounter();
+})();
+</script>
+</body>
+</html>
