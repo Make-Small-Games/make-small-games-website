@@ -11,7 +11,8 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: clamp(350px, 29vw, 455px);
+  min-height: 350px;
+  aspect-ratio: 1536 / 528;
 
   background-image:
     linear-gradient(
@@ -219,6 +220,18 @@
   min-width: 0;
   min-height: 220px;
 }
+
+/* Artwork inside Classes and Workshops cards */
+
+.cardArtworkImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 240px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
 
 /* Temporary placeholder */
 
@@ -1242,26 +1255,17 @@
   min-width: 0;
 }
 
-.testimonialArtPlaceholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
+/* Ghost and Unicorn artwork */
+
+.testimonialArtImage {
+  display: block;
   width: 100%;
-  min-height: 130px;
-  height: 100%;
-
-  padding: 10px;
-
-  border: 2px dashed rgba(99, 72, 162, 0.2);
-  border-radius: 12px;
-
-  font-family: 'Outfit', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #917ab4;
-  text-align: center;
+  max-width: 120px;
+  height: 145px;
+  object-fit: contain;
 }
+
 
 /* Temporary quote notice */
 

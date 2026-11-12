@@ -36,12 +36,25 @@ function LearningCard({
           : styles.workshopsCard
       }`}
     >
-      {/* Reserved illustration space on the left */}
-      <div className={styles.cardArtwork}>
-        <div className={styles.artPlaceholder}>
-          <span>Artwork</span>
-        </div>
-      </div>
+
+		{/* Artwork on the left */}
+		<div className={styles.cardArtwork}>
+		<img
+			src={
+			variant === 'classes'
+				? '/img/pixel_classroom_tutoring_scene.png'
+				: '/img/pixel_art_coding_workshop.png'
+			}
+			alt={
+			variant === 'classes'
+				? 'Reaper teacher helping a student make a game'
+				: 'Reaper teacher leading a group game development workshop'
+			}
+			className={styles.cardArtworkImage}
+			loading="lazy"
+		/>
+		</div>
+
 
       {/* Text and button on the right */}
       <div className={styles.cardContent}>
@@ -331,12 +344,17 @@ export default function Home() {
 
 			<div className={styles.testimonialsLayout}>
 
-			{/* LEFT: GHOST ARTWORK PLACEHOLDER */}
+
+			{/* LEFT: GHOST ARTWORK */}
 			<div className={styles.testimonialArtwork}>
-				<div className={styles.testimonialArtPlaceholder}>
-				Ghost artwork
-				</div>
+			<img
+				src="/img/make-small-games-ghost.png"
+				alt="Cute smiling ghost"
+				className={styles.testimonialArtImage}
+				loading="lazy"
+			/>
 			</div>
+
 
 			{/* CENTER: TESTIMONIAL CARDS */}
 			<div className={styles.testimonialCards}>
@@ -364,12 +382,17 @@ export default function Home() {
 
 			</div>
 
-			{/* RIGHT: UNICORN ARTWORK PLACEHOLDER */}
+
+			{/* RIGHT: UNICORN ARTWORK */}
 			<div className={styles.testimonialArtwork}>
-				<div className={styles.testimonialArtPlaceholder}>
-				Unicorn artwork
-				</div>
+			<img
+				src="/img/make-small-games-unicorn.png"
+				alt="Cute smiling unicorn"
+				className={styles.testimonialArtImage}
+				loading="lazy"
+			/>
 			</div>
+
 
 			</div>
 
