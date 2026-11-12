@@ -1,81 +1,57 @@
+
 import React from 'react';
+import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
 
 export default function PlayTest() {
   return (
-    <>
-      <style>{`
-        html,
-        body,
-        #__docusaurus {
-          margin: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          overscroll-behavior: none;
-          touch-action: none;
-        }
+    <Layout
+      title="Example Game"
+      description="Play an example game made with MakeCode Arcade."
+    >
+      <main
+        style={{
+          minHeight: '70vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          padding: '40px 20px',
+          background: '#f5f1ff',
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontSize: 'clamp(36px, 5vw, 56px)',
+            fontWeight: 900,
+            color: '#101b4c',
+          }}
+        >
+          GAME COMING SOON!
+        </h1>
 
-        .game-frame {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: calc(100vh - 60px);
-          border: 0;
+        <p
+          style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontSize: '20px',
+            color: '#283367',
+            maxWidth: '550px',
+            marginBottom: '30px',
+          }}
+        >
+          We're getting a playable game ready for you!
+          Check back soon to try it out.
+        </p>
 
-          touch-action: none;
-          overscroll-behavior: none;
-        }
-
-        .test-banner {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 60px;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          background: #222;
-          color: white;
-          font-size: 18px;
-          font-weight: bold;
-
-          overflow: hidden;
-
-          touch-action: none;
-          overscroll-behavior: none;
-        }
-
-        .moving-thing {
-          position: absolute;
-          font-size: 28px;
-          animation: moveAcross 2s linear infinite;
-        }
-
-        @keyframes moveAcross {
-          from {
-            transform: translateX(-45vw);
-          }
-
-          to {
-            transform: translateX(45vw);
-          }
-        }
-      `}</style>
-
-      <iframe
-        className="game-frame"
-        src="https://arcade.makecode.com/---run?id=S29293-83382-41772-36976"
-        allowFullScreen
-      />
-
-      <div className="test-banner">
-        <span>MAKE SMALL GAMES</span>
-        <div className="moving-thing">👻</div>
-      </div>
-    </>
+        <Link
+          to="/"
+          className="button button--primary button--lg"
+        >
+          Back to Home
+        </Link>
+      </main>
+    </Layout>
   );
 }

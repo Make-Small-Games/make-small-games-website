@@ -76,7 +76,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
-        respectPrefersColorScheme: true,
+        defaultMode: 'light',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
       },
       navbar: {
         title: 'Make Small Games',
@@ -86,15 +88,35 @@ const config = {
         },
         items: [
           {
+            to: '/classes',
+            label: 'Classes',
+            position: 'right',
+          },
+          {
+            to: '/workshops',
+            label: 'Workshops',
+            position: 'right',
+          },
+          {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
-            position: 'left',
             label: 'Resources',
+            position: 'right',
           },
-          {to: '/workshops', label: 'Workshops', position: 'left'},
-          {to: '/about', label: 'About', position: 'left'},
+          {
+            to: '/about',
+            label: 'About',
+            position: 'right',
+          },
+          {
+            to: '/classes',
+            label: "Let's Make Games!",
+            position: 'right',
+            className: 'navbar__link--cta',
+          },
         ],
       },
+
       footer: {
         style: 'dark',
         copyright: `Copyright © ${new Date().getFullYear()} Make Small Games.`,

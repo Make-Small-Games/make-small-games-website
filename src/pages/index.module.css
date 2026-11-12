@@ -1,10 +1,1331 @@
+
+/* ==========================================
+   MAKE SMALL GAMES - HOMEPAGE
+   ========================================== */
+
+
+/* ==========================================
+   1. HERO SECTION
+   ========================================== */
+
 .hero {
-	width: 100%;
-	background: #111;
+  position: relative;
+  width: 100%;
+  min-height: clamp(350px, 29vw, 455px);
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(6, 12, 48, 0.05) 15%,
+      rgba(6, 12, 48, 0.82) 39%,
+      rgba(6, 12, 48, 0.82) 61%,
+      rgba(6, 12, 48, 0.05) 85%
+    ),
+    url('/img/make-small-games-hero-bg.png');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px 20px;
+  overflow: hidden;
+  text-align: center;
 }
 
-.heroImage {
-	display: block;
-	width: 100%;
-	height: auto;
+.heroContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  color: white;
+}
+
+/* Hero title */
+
+.heroTitle {
+  font-family: 'Bungee', 'Arial Black', sans-serif;
+  font-size: clamp(3rem, 4.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -1px;
+  margin: 0 0 15px;
+}
+
+.heroTitle span {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.05em 0.08em 0.13em;
+
+  background: linear-gradient(
+    180deg,
+    #48f5ff 0%,
+    #36d7ff 40%,
+    #ed60f5 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  -webkit-text-stroke: 2.5px #070b2c;
+  paint-order: stroke fill;
+
+  filter: drop-shadow(4px 5px 0 #080b2c);
+}
+
+/* Hero subtitle */
+
+.heroSubtitle {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(17px, 1.8vw, 25px);
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  color: #ffffff;
+  margin: 0 0 14px;
+
+  text-shadow:
+    2px 2px 0 #101342,
+    0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Hero description */
+
+.heroDescription {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(18px, 1.7vw, 24px);
+  line-height: 1.35;
+  font-weight: 500;
+  color: white;
+  margin: 0;
+
+  text-shadow: 1px 2px 5px #080b2a;
+}
+
+
+/* ==========================================
+   2. CHOOSE HOW TO LEARN SECTION
+   ========================================== */
+
+.learningSection {
+  background: #ffffff;
+  padding: 30px 30px 45px;
+  color: #101b4c;
+}
+
+.learningContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Section heading and subtitle */
+
+.learningHeader {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.learningHeader h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(28px, 3vw, 39px);
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  line-height: 1.15;
+  color: #101b4c;
+  margin-bottom: 5px;
+}
+
+.learningHeader p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #283367;
+  margin: 0;
+}
+
+
+/* ==========================================
+   3. LEARNING CARDS - LAYOUT
+   ========================================== */
+
+/* Shared container */
+
+.learningCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
+
+  background: #faf8ff;
+  border: 1px solid #f0eafb;
+  border-radius: 20px;
+  padding: 12px;
+}
+
+/* Individual cards */
+
+.learningCard {
+  display: grid;
+  grid-template-columns: 37% minmax(0, 1fr);
+  gap: 15px;
+
+  min-height: 290px;
+  padding: 20px;
+
+  border-radius: 15px;
+  overflow: hidden;
+  color: #101b4c;
+}
+
+/* Classes card background */
+
+.classesCard {
+  background: linear-gradient(
+    115deg,
+    #c2b6ff 0%,
+    #dce5ff 100%
+  );
+}
+
+/* Workshops card background */
+
+.workshopsCard {
+  background: linear-gradient(
+    115deg,
+    #ffc5ee 0%,
+    #f9c1df 100%
+  );
+}
+
+
+/* ==========================================
+   4. LEARNING CARDS - ARTWORK
+   ========================================== */
+
+/* Left-side illustration area */
+
+.cardArtwork {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 220px;
+}
+
+/* Temporary placeholder */
+
+.artPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+
+  border: 2px dashed rgba(41, 37, 111, 0.22);
+  border-radius: 12px;
+
+  color: rgba(41, 37, 111, 0.45);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   5. LEARNING CARDS - TEXT
+   ========================================== */
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Card titles */
+
+.cardTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(27px, 2.4vw, 35px);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.1;
+  color: #101b4c;
+  margin: 0 0 8px;
+}
+
+/* Card subtitles */
+
+.cardSubtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #101b4c;
+  margin: 0 0 15px;
+}
+
+/* Feature checkmark lists */
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+
+.featureList li {
+  position: relative;
+  padding-left: 23px;
+  margin-bottom: 9px;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #101b4c;
+}
+
+/* Checkmarks */
+
+.featureList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: -2px;
+
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #007da8;
+}
+
+/* Workshop checkmark color */
+
+.workshopsCard .featureList li::before {
+  color: #182b78;
+}
+
+
+/* ==========================================
+   6. LEARNING CARDS - BUTTONS
+   ========================================== */
+
+.cardButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 43px;
+  margin-top: auto;
+  padding: 10px 12px;
+
+  border-radius: 10px;
+  color: #07163d !important;
+  text-decoration: none !important;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.cardButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Cyan Classes button */
+
+.classesButton {
+  background: #3cdef0;
+}
+
+/* Pink Workshops button */
+
+.workshopsButton {
+  background: #f13dcb;
+}
+
+
+/* ==========================================
+   7. RESPONSIVE DESIGN
+   ========================================== */
+
+/* Medium screens: stack learning cards */
+
+@media (max-width: 1050px) {
+  .learningCards {
+    grid-template-columns: 1fr;
+  }
+
+  .learningCard {
+    grid-template-columns: 35% minmax(0, 1fr);
+  }
+}
+
+
+/* Small screens: hero adjustments */
+
+@media (max-width: 650px) {
+  .hero {
+    min-height: 420px;
+    padding: 35px 14px;
+    background-position: center bottom;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.9rem, 7.4vw, 3rem);
+    letter-spacing: -1px;
+    line-height: 1.2;
+  }
+
+  .heroTitle span {
+    -webkit-text-stroke: 1.5px #070b2c;
+    filter: drop-shadow(2px 3px 0 #080b2c);
+  }
+
+  .heroSubtitle {
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+  }
+
+  .heroDescription {
+    font-size: 18px;
+  }
+}
+
+
+/* Small screens: learning card adjustments */
+
+@media (max-width: 600px) {
+  .learningSection {
+    padding: 25px 12px 35px;
+  }
+
+  .learningHeader p {
+    font-size: 16px;
+  }
+
+  .learningCards {
+    padding: 8px;
+    gap: 14px;
+  }
+
+  .learningCard {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .cardArtwork {
+    min-height: 140px;
+  }
+
+  .artPlaceholder {
+    min-height: 140px;
+  }
+
+  .cardTitle {
+    font-size: 30px;
+  }
+
+  .cardContent {
+    min-height: 260px;
+  }
+}
+
+
+/* ==========================================
+   8. LEARN BY MAKING GAMES
+   ========================================== */
+
+.makingSection {
+  background: #ffffff;
+  padding: 0 30px 35px;
+  color: #101b4c;
+}
+
+.makingContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 25px;
+
+  background: linear-gradient(
+    120deg,
+    #e3ebff,
+    #eef0ff
+  );
+
+  border-radius: 18px;
+}
+
+/* Section heading */
+
+.makingHeader {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.makingHeader h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(28px, 3vw, 39px);
+  font-weight: 900;
+  color: #101b4c;
+  margin: 0 0 5px;
+}
+
+.makingHeader p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #283367;
+  margin: 0;
+}
+
+/* Three column layout */
+
+.makingGrid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1.15fr)
+    minmax(0, 0.85fr);
+  gap: 28px;
+  align-items: center;
+}
+
+/* ==========================================
+   LEFT - MAKECODE INFORMATION
+   ========================================== */
+
+.makingIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.makeCodeBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 7px;
+}
+
+.makeCodeBrand h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 800;
+  color: #101b4c;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.makingIntro h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #101b4c;
+  margin: 5px 0 12px;
+}
+
+.makingIntro p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #182654;
+  margin: 0 0 20px;
+}
+
+/* Example game button */
+
+.exampleButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 43px;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 18px;
+
+  background: #f13dcb;
+  border-radius: 10px;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+
+  color: #101b4c !important;
+  text-decoration: none !important;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.exampleButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================
+   CENTER - GAME PREVIEW
+   ========================================== */
+
+.makingPreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.makingPreview a {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+}
+
+.makingPreview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  border-radius: 12px;
+
+  transition: transform 0.2s;
+}
+
+.makingPreview a:hover img {
+  transform: scale(1.02);
+}
+
+.makingPreview p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #263464;
+  text-align: center;
+  margin: 8px 0 0;
+}
+
+/* ==========================================
+   RIGHT - WHAT YOU'LL LEARN
+   ========================================== */
+
+.makingTopics {
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 12px;
+  padding: 20px 22px;
+  min-width: 0;
+}
+
+.makingTopics h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #101b4c;
+  margin: 0 0 13px;
+}
+
+.makingTopics ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.makingTopics li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 9px;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #101b4c;
+}
+
+.makingTopics li:last-child {
+  margin-bottom: 0;
+}
+
+.makingTopics li span:first-child {
+  display: inline-flex;
+  justify-content: center;
+  width: 25px;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 1050px) {
+  .makingGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .makingTopics {
+    grid-column: 1 / -1;
+  }
+
+  .makingTopics ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .makingTopics li {
+    margin: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .makingSection {
+    padding: 0 12px 30px;
+  }
+
+  .makingContainer {
+    padding: 22px 16px;
+  }
+
+  .makingHeader p {
+    font-size: 15px;
+  }
+
+  .makingGrid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .makingIntro {
+    align-items: center;
+    text-align: center;
+  }
+
+  .makeCodeBrand {
+    justify-content: center;
+  }
+
+  .makingTopics {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .makingTopics ul {
+    grid-template-columns: 1fr;
+  }
+
+  .exampleButton {
+    max-width: 100%;
+  }
+}
+
+
+/* ==========================================
+   9. PLAY, HOLD, AND SHARE SECTION
+   ========================================== */
+
+.takeHomeSection {
+  background: #ffffff;
+  padding: 0 30px 35px;
+  color: #101b4c;
+}
+
+.takeHomeContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 25px 35px 30px;
+
+  background: linear-gradient(
+    120deg,
+    #fff3dc,
+    #fff8e9
+  );
+
+  border-radius: 18px;
+}
+
+/* Header */
+
+.takeHomeHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.takeHomeHeader h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 900;
+  color: #101b4c;
+  line-height: 1.15;
+  margin: 0 0 5px;
+}
+
+.takeHomeHeader p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #283367;
+  margin: 0;
+}
+
+/* Three steps and arrows */
+
+.takeHomeSteps {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) 45px
+    minmax(0, 1fr) 45px
+    minmax(0, 1fr);
+
+  align-items: center;
+  gap: 12px;
+}
+
+.takeHomeStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.takeHomeStep h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #101b4c;
+  margin: 12px 0 0;
+}
+
+.takeHomeStep p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: #283367;
+  margin: 3px 0 0;
+}
+
+.takeHomeArrow {
+  font-family: Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: #101b4c;
+  text-align: center;
+}
+
+/* Step 1: Game device */
+
+.gameDevice {
+  width: min(100%, 270px);
+  aspect-ratio: 1.7 / 1;
+
+  background: #17235a;
+  border: 7px solid #17235a;
+  border-radius: 14px;
+
+  box-shadow: 5px 6px 0 #8f81ba;
+  overflow: hidden;
+}
+
+.gameDevice img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+/* Step 2: Custom artwork */
+
+.artworkVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  width: min(100%, 230px);
+  height: 155px;
+
+  background: #e7dbff;
+  border: 5px solid #56439c;
+  border-radius: 12px;
+
+  box-shadow: 4px 5px 0 #b6a6df;
+}
+
+.artworkVisual span {
+  font-size: 52px;
+}
+
+/* Step 3: Game keychain */
+
+.keychainVisual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 180px;
+  height: 155px;
+}
+
+.keychainRing {
+  position: absolute;
+  top: 1px;
+  right: 8px;
+
+  width: 49px;
+  height: 49px;
+
+  border: 7px solid #45517c;
+  border-radius: 50%;
+}
+
+.keychainBody {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 126px;
+  height: 126px;
+
+  background: #85c4f2;
+  border: 7px solid #243b7d;
+  border-radius: 50%;
+
+  box-shadow: 5px 5px 0 #9db4d2;
+}
+
+.keychainBody span {
+  font-size: 63px;
+}
+
+/* Responsive */
+
+@media (max-width: 750px) {
+  .takeHomeSteps {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .takeHomeArrow {
+    transform: rotate(90deg);
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .takeHomeStep {
+    padding: 8px 0;
+  }
+
+  .takeHomeSection {
+    padding: 0 12px 30px;
+  }
+
+  .takeHomeContainer {
+    padding: 25px 16px;
+  }
+
+  .takeHomeHeader p {
+    font-size: 15px;
+  }
+}
+
+
+/* ==========================================
+   10. GAMES YOU CAN MAKE GALLERY
+   ========================================== */
+
+.gamesSection {
+  background: #ffffff;
+  padding: 0 30px 35px;
+  color: #101b4c;
+}
+
+.gamesContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 25px 25px 30px;
+
+  background: linear-gradient(
+    120deg,
+    #f0e5ff,
+    #f6eaff
+  );
+
+  border-radius: 18px;
+}
+
+/* Header */
+
+.gamesHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.gamesHeader h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(27px, 3vw, 39px);
+  font-weight: 900;
+  color: #101b4c;
+  line-height: 1.15;
+  margin: 0 0 5px;
+}
+
+.gamesHeader p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #283367;
+  margin: 0;
+}
+
+/* Six equal-sized game cards */
+
+.gamesGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gameTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+/* Game screenshot area */
+
+.gameThumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  aspect-ratio: 1.7 / 1;
+
+  border-radius: 9px;
+  overflow: hidden;
+
+  background: #242c65;
+}
+
+.gameThumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+/* Temporary game placeholders */
+
+.gamePlaceholder {
+  border: 2px dashed rgba(41, 37, 111, 0.2);
+  background: #c2b6ef;
+}
+
+.gameTile:nth-child(2) .gamePlaceholder {
+  background: #b8e5d7;
+}
+
+.gameTile:nth-child(3) .gamePlaceholder {
+  background: #b7a9e5;
+}
+
+.gameTile:nth-child(4) .gamePlaceholder {
+  background: #a9e0cd;
+}
+
+.gameTile:nth-child(5) .gamePlaceholder {
+  background: #a8c9fa;
+}
+
+.gameTile:nth-child(6) .gamePlaceholder {
+  background: #55528e;
+}
+
+.gamePlaceholderSymbol {
+  font-size: clamp(24px, 3vw, 45px);
+  color: white;
+}
+
+/* Game names */
+
+.gameTile h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #101b4c;
+  line-height: 1.2;
+  margin: 9px 0 0;
+}
+
+/* ==========================================
+   RESPONSIVE GALLERY
+   ========================================== */
+
+@media (max-width: 1100px) {
+  .gamesGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gamesSection {
+    padding: 0 12px 30px;
+  }
+
+  .gamesContainer {
+    padding: 22px 15px;
+  }
+
+  .gamesHeader p {
+    font-size: 15px;
+  }
+
+  .gamesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+
+  .gameTile h3 {
+    font-size: 14px;
+  }
+
+  .gamePlaceholderSymbol {
+    font-size: 32px;
+  }
+}
+
+
+/* ==========================================
+   11. PARENTS & STUDENTS TESTIMONIALS
+   ========================================== */
+
+.testimonialsSection {
+  background: #ffffff;
+  padding: 0 30px 35px;
+  color: #101b4c;
+}
+
+.testimonialsContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 25px 20px 20px;
+
+  background: linear-gradient(
+    120deg,
+    #eadbff,
+    #f1e1ff
+  );
+
+  border-radius: 18px;
+}
+
+/* ==========================================
+   SECTION HEADING
+   ========================================== */
+
+.testimonialsHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.testimonialsHeader h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(27px, 3vw, 39px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #101b4c;
+  margin: 0 0 5px;
+}
+
+.testimonialsHeader p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #283367;
+  margin: 0;
+}
+
+/* ==========================================
+   THREE CARDS + ARTWORK SPACES
+   ========================================== */
+
+.testimonialsLayout {
+  display: grid;
+  grid-template-columns:
+    100px minmax(0, 1fr) 100px;
+
+  align-items: stretch;
+  gap: 14px;
+}
+
+/* Three equal-sized cards */
+
+.testimonialCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Individual testimonial */
+
+.testimonialCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-width: 0;
+  min-height: 145px;
+  padding: 20px;
+
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 13px;
+}
+
+/* Quote text */
+
+.testimonialCard p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+
+  color: #101b4c;
+  margin: 0 0 15px;
+}
+
+/* Attribution */
+
+.testimonialCard span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b689c;
+}
+
+/* ==========================================
+   DECORATIVE ARTWORK SPACES
+   ========================================== */
+
+.testimonialArtwork {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.testimonialArtPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 130px;
+  height: 100%;
+
+  padding: 10px;
+
+  border: 2px dashed rgba(99, 72, 162, 0.2);
+  border-radius: 12px;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #917ab4;
+  text-align: center;
+}
+
+/* Temporary quote notice */
+
+.testimonialsNotice {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  text-align: center;
+  color: #736796;
+  margin: 14px 0 0;
+}
+
+/* ==========================================
+   RESPONSIVE TESTIMONIALS
+   ========================================== */
+
+@media (max-width: 1100px) {
+  .testimonialsLayout {
+    grid-template-columns: 65px minmax(0, 1fr) 65px;
+    gap: 10px;
+  }
+
+  .testimonialCards {
+    gap: 12px;
+  }
+
+  .testimonialCard {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 850px) {
+  .testimonialsLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonialArtwork {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .testimonialsSection {
+    padding: 0 12px 30px;
+  }
+
+  .testimonialsContainer {
+    padding: 22px 15px;
+  }
+
+  .testimonialsHeader p {
+    font-size: 15px;
+  }
+
+  .testimonialCards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .testimonialCard {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .testimonialCard p {
+    font-size: 16px;
+  }
 }

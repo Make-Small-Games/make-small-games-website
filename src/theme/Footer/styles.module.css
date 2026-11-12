@@ -1,0 +1,238 @@
+
+/* ==========================================
+   MAKE SMALL GAMES - SITE FOOTER
+   ========================================== */
+
+.footer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  background: linear-gradient(
+    110deg,
+    #0b153d 0%,
+    #291653 55%,
+    #0a1741 100%
+  );
+
+  border-top: 3px solid #8046dc;
+  color: #ffffff;
+}
+
+/* ==========================================
+   MAIN FOOTER LAYOUT
+   ========================================== */
+
+.footerInner {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 35px 20px;
+}
+
+/* ==========================================
+   LEFT SIDE - LOGO AND BRAND
+   ========================================== */
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+}
+
+.footerLogo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.footerLogo img {
+  display: block;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandName {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.brandName:hover {
+  color: #f187f4 !important;
+}
+
+.brandText p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #e2d9ff;
+  margin: 5px 0 0;
+}
+
+/* ==========================================
+   RIGHT SIDE - SOCIALS AND NAVIGATION
+   ========================================== */
+
+.footerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Social media icons */
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.socialLink,
+.socialDisabled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.socialLink {
+  color: #ffffff !important;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.socialLink:hover {
+  color: #ed70f4 !important;
+  transform: translateY(-3px);
+}
+
+.socialDisabled {
+  color: #ffffff;
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Navigation links */
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footerLinks a {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: color 0.2s;
+}
+
+.footerLinks a:hover {
+  color: #f187f4 !important;
+}
+
+/* ==========================================
+   COPYRIGHT
+   ========================================== */
+
+.footerBottom {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 35px 24px;
+
+  text-align: right;
+}
+
+.footerBottom p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #d3cbee;
+  margin: 0;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+   ========================================== */
+
+@media (max-width: 750px) {
+
+  .footerInner {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 30px 20px 20px;
+  }
+
+  .footerBrand {
+    justify-content: center;
+  }
+
+  .footerRight {
+    align-items: center;
+    gap: 20px;
+  }
+
+  .socialLinks {
+    justify-content: center;
+  }
+
+  .footerLinks {
+    justify-content: center;
+    gap: 12px 20px;
+  }
+
+  .footerBottom {
+    text-align: center;
+    padding: 10px 20px 25px;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .footerLogo img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .brandName {
+    font-size: 20px;
+  }
+
+  .brandText p {
+    font-size: 12px;
+  }
+
+  .footerLinks {
+    gap: 10px 15px;
+  }
+}
